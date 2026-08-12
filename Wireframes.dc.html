@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<meta name="design_doc_mode" content="canvas">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#e9e5db;font-family:'Patrick Hand',cursive}
+.dv-turn{padding:40px 44px 32px;border-bottom:1px solid rgba(0,0,0,.12);scroll-margin-top:16px}
+.dv-thd{display:flex;align-items:baseline;gap:10px;margin:0 0 20px}
+.dv-tid{font:600 10px ui-monospace,Menlo,monospace;padding:3px 7px;background:#1a1a1a;color:#fff;border-radius:4px;text-decoration:none}
+.dv-tname{font:600 15px/1.2 'Kalam',cursive;color:#1a1a1a}
+.dv-opts{display:flex;flex-wrap:wrap;gap:32px;align-items:flex-start}
+.dv-opt{flex:none;display:flex;flex-direction:column;gap:9px;scroll-margin-top:16px}
+.dv-oid{font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none}
+.dv-olabel{display:flex;align-items:baseline;gap:8px;font:16px 'Kalam',cursive;color:rgba(0,0,0,.65)}
+.dv-card{max-width:100%;background:#faf6ef;border:2px solid #1a1a1a;box-shadow:4px 4px 0 rgba(0,0,0,.15);overflow:hidden}
+.dv-opt:target .dv-oid{background:#c8102e;color:#fff}
+.dv-next{margin:22px 0 0;font:15px/1.5 'Patrick Hand',cursive;color:rgba(0,0,0,.6)}
+.tag{font:14px 'Patrick Hand',cursive;color:#555;border:1px dashed #999;padding:1px 6px;border-radius:3px}
+</style>
+</helmet>
+
+<section class="dv-turn" id="t4">
+<div class="dv-thd"><a class="dv-tid" href="#t4">4</a><span class="dv-tname">Compare-as-modal approaches (triggered by button)</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="4a">
+<div class="dv-olabel"><a class="dv-oid" href="#4a">4a</a>Trigger button in page + centered modal overlay</div>
+<div style="display:flex;flex-direction:column;gap:14px">
+<div class="dv-card" style="width:420px;padding:22px 24px">
+  <div style="font:12px 'Patrick Hand';color:#999;margin-bottom:8px">ON THE PAGE</div>
+  <div style="border:2px solid #1a1a1a;background:#1a1a1a;color:#fff;padding:12px 18px;font:17px 'Kalam',cursive;text-align:center;width:fit-content">⚖ CHALLENGE A RIVAL</div>
+</div>
+<div style="position:relative;width:420px;height:280px;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center">
+  <div class="dv-card" style="width:340px;padding:20px;position:relative">
+    <div style="position:absolute;top:8px;right:12px;font:20px 'Patrick Hand';color:#999">✕</div>
+    <div style="font:20px 'Kalam',cursive;font-weight:700;text-align:center">SUBPOENA A RIVAL</div>
+    <div style="margin-top:12px;border:2px solid #1a1a1a;padding:9px 12px;font:15px 'Patrick Hand'">friend#TAG</div>
+    <div style="margin-top:8px;border:2px solid #1a1a1a;background:#c8102e;color:#fff;padding:9px 12px;font:16px 'Kalam',cursive;text-align:center">CHALLENGE</div>
+    <div style="margin-top:14px;display:flex;justify-content:space-between;font:15px 'Patrick Hand'">
+      <span>you: 187 acs</span><span style="color:#2a7a3b;font-weight:700">rival: 241 — WINNER</span>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="dv-opt" id="4b">
+<div class="dv-olabel"><a class="dv-oid" href="#4b">4b</a>Modal styled as a case file folder sliding down (stamp reveal)</div>
+<div style="position:relative;width:400px;height:340px;background:rgba(0,0,0,.55);display:flex;align-items:flex-start;justify-content:center;padding-top:20px">
+  <div class="dv-card" style="width:340px;padding:0;overflow:hidden">
+    <div style="background:#1a1a1a;color:#fff;padding:10px 16px;display:flex;justify-content:space-between;align-items:center">
+      <span style="font:16px 'Kalam',cursive;font-weight:700">RIVAL FILE</span><span style="font:16px 'Patrick Hand'">✕</span>
+    </div>
+    <div style="padding:16px;text-align:center">
+      <div style="border:2px solid #1a1a1a;padding:9px 12px;font:15px 'Patrick Hand'">friend#TAG</div>
+      <div style="margin-top:8px;border:2px solid #1a1a1a;background:#c8102e;color:#fff;padding:9px 12px;font:16px 'Kalam',cursive">PULL FILE</div>
+      <div style="margin-top:16px;position:relative;padding:12px;border:1px dashed #999">
+        <div style="position:absolute;top:-10px;right:-6px;transform:rotate(12deg);border:3px solid #2a7a3b;color:#2a7a3b;font:15px 'Kalam',cursive;font-weight:700;padding:1px 8px">RIVAL WINS</div>
+        <div style="display:flex;justify-content:space-between;font:15px 'Patrick Hand'"><span>you 187</span><span>rival 241</span></div>
+        <div style="font:11px 'Patrick Hand';color:#999;margin-top:4px">acs comparison</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="dv-opt" id="4c">
+<div class="dv-olabel"><a class="dv-oid" href="#4c">4c</a>Modal with stat-bar comparison + share row built in</div>
+<div style="position:relative;width:460px;height:400px;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center">
+  <div class="dv-card" style="width:400px;padding:22px">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+      <span style="font:20px 'Kalam',cursive;font-weight:700">COMPARE CASE FILES</span><span style="font:20px 'Patrick Hand';color:#999">✕</span>
+    </div>
+    <div style="display:flex;gap:8px">
+      <div style="border:2px solid #1a1a1a;padding:9px 12px;flex:1;font:15px 'Patrick Hand'">friend#TAG</div>
+      <div style="border:2px solid #1a1a1a;background:#c8102e;color:#fff;padding:9px 14px;font:15px 'Kalam',cursive">GO</div>
+    </div>
+    <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px">
+      <div><div style="display:flex;justify-content:space-between;font:13px 'Patrick Hand'"><span>ACS</span><span>187 vs 241</span></div><div style="height:8px;background:#eee;margin-top:3px"><div style="width:55%;height:100%;background:#1a1a1a"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;font:13px 'Patrick Hand'"><span>WINRATE</span><span>38% vs 67%</span></div><div style="height:8px;background:#eee;margin-top:3px"><div style="width:36%;height:100%;background:#1a1a1a"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;font:13px 'Patrick Hand'"><span>HS%</span><span>14% vs 41%</span></div><div style="height:8px;background:#eee;margin-top:3px"><div style="width:25%;height:100%;background:#1a1a1a"></div></div></div>
+    </div>
+    <div style="margin-top:14px;text-align:center;font:17px 'Kalam',cursive;color:#c8102e;font-weight:700">RIVAL WINS. GO CRY ABOUT IT.</div>
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <div style="border:2px solid #1a1a1a;padding:8px 12px;font:14px 'Patrick Hand'">⬇ download</div>
+      <div style="border:2px solid #1a1a1a;padding:8px 12px;font:14px 'Patrick Hand'">copy link</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "use <a class="dv-oid" href="#4c">4c</a>'s bar-comparison style for the modal" · "go build the full site with this modal added to 3a"</p>
+</section>
+
+<section class="dv-turn" id="t3">
+<div class="dv-thd"><a class="dv-tid" href="#t3">3</a><span class="dv-tname">Full website pass, in the 1a dossier direction</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="3a">
+<div class="dv-olabel"><a class="dv-oid" href="#3a">3a</a>Full-page dossier site — hero, verdict, evidence grid, rival, footer</div>
+<div class="dv-card" style="width:900px">
+  <div style="padding:18px 32px;border-bottom:2px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;align-items:center;gap:9px">
+      <div style="width:28px;height:28px;border:2px solid #1a1a1a;transform:rotate(45deg)"></div>
+      <span style="font:24px 'Kalam',cursive;font-weight:700">VALOROAST</span>
+    </div>
+    <span style="font:15px 'Patrick Hand'">how it works &nbsp; faq &nbsp; delete my roast</span>
+  </div>
+
+  <div style="padding:50px 32px;text-align:center;border-bottom:1px dashed #999">
+    <div style="font:15px 'Patrick Hand';color:#999;letter-spacing:2px">CASE FILE INTAKE</div>
+    <div style="font:38px 'Kalam',cursive;font-weight:700;line-height:1.15;margin-top:6px">DROP YOUR RIOT ID.<br>WE'LL TELL YOU THE TRUTH.</div>
+    <div style="font:16px 'Patrick Hand';color:#666;margin-top:10px">AI reads your HS%, winrate, ACS, main agent & last 5 games — then roasts you for the whole lobby to see.</div>
+    <div style="margin-top:20px;display:flex;gap:10px;justify-content:center">
+      <div style="border:2px solid #1a1a1a;padding:13px 18px;font:17px 'Patrick Hand';width:230px;text-align:left">Username #TAG</div>
+      <div style="border:2px solid #1a1a1a;background:#c8102e;color:#fff;padding:13px 22px;font:19px 'Kalam',cursive">ROAST ME</div>
+    </div>
+    <div style="margin-top:10px;font:13px 'Patrick Hand';color:#999">[scanning stats... this may take a sec]</div>
+  </div>
+
+  <div style="padding:36px 32px;position:relative;border-bottom:1px dashed #999">
+    <div style="position:absolute;top:20px;right:40px;transform:rotate(-10deg);border:4px solid #c8102e;color:#c8102e;font:26px 'Kalam',cursive;font-weight:700;padding:3px 14px">BUSTED</div>
+    <div style="font:12px 'Patrick Hand';color:#999;margin-bottom:8px">VERDICT</div>
+    <div style="font:26px 'Kalam',cursive;line-height:1.4;max-width:640px">"14% headshots and you still one-tap peek mid? bro's aiming with his feet, and the feet are also missing."</div>
+    <div style="margin-top:16px;display:flex;align-items:center;gap:10px">
+      <div style="width:38px;height:38px;border:2px solid #1a1a1a"></div>
+      <div style="font:17px 'Patrick Hand'">BADGE UNLOCKED: <b>"IRON WILL, DIAMOND EGO"</b> — pin it to your profile</div>
+    </div>
+  </div>
+
+  <div style="padding:30px 32px;border-bottom:1px dashed #999">
+    <div style="font:12px 'Patrick Hand';color:#999;margin-bottom:10px">EVIDENCE ON FILE</div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px">
+      <div style="border:2px solid #1a1a1a;padding:12px;text-align:center"><div style="font:11px 'Patrick Hand';color:#777">HS%</div><div style="font:22px 'Kalam',cursive;font-weight:700">14%</div></div>
+      <div style="border:2px solid #1a1a1a;padding:12px;text-align:center"><div style="font:11px 'Patrick Hand';color:#777">WINRATE</div><div style="font:22px 'Kalam',cursive;font-weight:700">38%</div></div>
+      <div style="border:2px solid #1a1a1a;padding:12px;text-align:center"><div style="font:11px 'Patrick Hand';color:#777">ACS</div><div style="font:22px 'Kalam',cursive;font-weight:700">187</div></div>
+      <div style="border:2px solid #1a1a1a;padding:12px;text-align:center"><div style="font:11px 'Patrick Hand';color:#777">MAIN</div><div style="font:22px 'Kalam',cursive;font-weight:700">Jett</div></div>
+      <div style="border:2px solid #1a1a1a;padding:12px;text-align:center"><div style="font:11px 'Patrick Hand';color:#777">LAST 5</div><div style="font:20px 'Kalam',cursive;font-weight:700">L L L W L</div></div>
+    </div>
+  </div>
+
+  <div style="padding:30px 32px;border-bottom:1px dashed #999">
+    <div style="font:12px 'Patrick Hand';color:#999;margin-bottom:10px">SUMMON A RIVAL TO COMPARE</div>
+    <div style="display:flex;gap:10px;max-width:420px">
+      <div style="border:2px solid #1a1a1a;padding:10px;flex:1;font:15px 'Patrick Hand'">friend#TAG</div>
+      <div style="border:2px solid #1a1a1a;padding:10px 16px;background:#eee;font:15px 'Patrick Hand'">CHALLENGE</div>
+    </div>
+    <div style="margin-top:12px;display:flex;justify-content:space-between;max-width:420px;font:16px 'Patrick Hand'">
+      <span>you: 187 acs</span><span style="color:#2a7a3b;font-weight:700">rival: 241 acs — WINNER</span>
+    </div>
+    <div style="font:12px 'Patrick Hand';color:#999;margin-top:4px">rival is generated to always edge you out — share it, see who laughs harder</div>
+  </div>
+
+  <div style="padding:22px 32px;display:flex;gap:10px;border-bottom:1px dashed #999">
+    <div style="border:2px solid #1a1a1a;padding:10px 16px;font:16px 'Patrick Hand'">⬇ download roast card</div>
+    <div style="border:2px solid #1a1a1a;padding:10px 16px;font:16px 'Patrick Hand'">copy link</div>
+    <div style="margin-left:auto;font:14px 'Patrick Hand';color:#777;align-self:center">request roast deletion — permanent, can't be undone</div>
+  </div>
+
+  <div style="padding:16px 32px;text-align:center;font:13px 'Patrick Hand';color:#999">
+    made for the valorant community, not affiliated with riot games
+  </div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "go with <a class="dv-oid" href="#3a">3a</a>, build it as the real site" · "tweak spacing / mobile version of 3a"</p>
+</section>
+
+<section class="dv-turn" id="t2">
+<div class="dv-thd"><a class="dv-tid" href="#t2">2</a><span class="dv-tname">More dossier/case-file style directions</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="2a">
+<div class="dv-olabel"><a class="dv-oid" href="#2a">2a</a>Interrogation Report — full-bleed stamped verdict, stats as evidence photos</div>
+<div class="dv-card" style="width:420px">
+  <div style="padding:16px 18px;border-bottom:2px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:26px;height:26px;border:2px solid #1a1a1a;transform:rotate(45deg)"></div>
+      <span style="font:22px 'Kalam',cursive;font-weight:700">VALOROAST</span>
+    </div>
+    <span style="font:13px 'Patrick Hand';color:#999">CASE #00187</span>
+  </div>
+
+  <div style="padding:18px;text-align:center;border-bottom:1px dashed #999">
+    <div style="font:24px 'Kalam',cursive;font-weight:700;line-height:1.2">SUBMIT FOR INTERROGATION</div>
+    <div style="margin-top:12px;display:flex;gap:8px;justify-content:center">
+      <div style="border:2px solid #1a1a1a;padding:9px 14px;font:15px 'Patrick Hand';width:170px;text-align:left">Username #TAG</div>
+      <div style="border:2px solid #1a1a1a;background:#c8102e;color:#fff;padding:9px 16px;font:16px 'Kalam',cursive">INTERROGATE</div>
+    </div>
+  </div>
+
+  <div style="position:relative;padding:26px 18px;text-align:center;border-bottom:1px dashed #999;overflow:hidden">
+    <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:.9;transform:rotate(-9deg)">
+      <div style="border:5px solid #c8102e;color:#c8102e;font:34px 'Kalam',cursive;font-weight:700;padding:4px 22px;letter-spacing:2px">GUILTY</div>
+    </div>
+    <div style="position:relative;font:12px 'Patrick Hand';color:#999;margin-bottom:60px">[verdict stamp slams down over roast text on load]</div>
+    <div style="position:relative;font:18px 'Kalam',cursive;line-height:1.4;background:rgba(250,246,239,.85);display:inline-block;padding:4px 10px">"38% winrate confirmed. the enemy team thanks you for your service."</div>
+  </div>
+
+  <div style="padding:16px 18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;border-bottom:1px dashed #999">
+    <div style="border:2px solid #1a1a1a;padding:8px;text-align:center"><div style="font:11px 'Patrick Hand';color:#777">EVIDENCE A</div><div style="font:20px 'Kalam',cursive;font-weight:700">14% HS</div></div>
+    <div style="border:2px solid #1a1a1a;padding:8px;text-align:center"><div style="font:11px 'Patrick Hand';color:#777">EVIDENCE B</div><div style="font:20px 'Kalam',cursive;font-weight:700">38% WR</div></div>
+    <div style="border:2px solid #1a1a1a;padding:8px;text-align:center"><div style="font:11px 'Patrick Hand';color:#777">EVIDENCE C</div><div style="font:20px 'Kalam',cursive;font-weight:700">187 ACS</div></div>
+  </div>
+  <div style="padding:12px 18px;display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px dashed #999">
+    <span class="tag">MAIN: JETT</span><span class="tag">L5: L L L W L</span>
+  </div>
+
+  <div style="padding:14px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px dashed #999">
+    <div style="width:34px;height:34px;border:2px solid #1a1a1a;flex:none"></div>
+    <div style="font:16px 'Patrick Hand'">BADGE: <b>"REPEAT OFFENDER"</b> — pin it to your profile</div>
+  </div>
+
+  <div style="padding:16px 18px;border-bottom:1px dashed #999">
+    <div style="font:12px 'Patrick Hand';color:#777;margin-bottom:6px">[BRING IN A WITNESS TO COMPARE]</div>
+    <div style="display:flex;gap:8px;font:15px 'Patrick Hand'">
+      <div style="border:2px solid #1a1a1a;padding:8px;flex:1">friend#TAG</div>
+      <div style="border:2px solid #1a1a1a;padding:8px;background:#eee">SUBPOENA</div>
+    </div>
+    <div style="margin-top:8px;font:15px 'Patrick Hand';color:#2a7a3b;font-weight:700">witness testimony: "241 acs, clean hands" — witness wins</div>
+  </div>
+
+  <div style="padding:14px 18px;display:flex;gap:8px;border-bottom:1px dashed #999">
+    <div style="border:2px solid #1a1a1a;padding:8px 12px;font:15px 'Patrick Hand'">⬇ download case file</div>
+    <div style="border:2px solid #1a1a1a;padding:8px 12px;font:15px 'Patrick Hand'">copy link</div>
+  </div>
+  <div style="padding:12px 18px;text-align:center;font:13px 'Patrick Hand';color:#777">
+    seal / delete this case — <span style="color:#999">permanent, cannot be undone</span>
+  </div>
+</div>
+</div>
+
+<div class="dv-opt" id="2b">
+<div class="dv-olabel"><a class="dv-oid" href="#2b">2b</a>Wanted Poster — vertical, single hero verdict + badge medal</div>
+<div class="dv-card" style="width:340px">
+  <div style="padding:14px;border-bottom:2px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;align-items:center;gap:7px">
+      <div style="width:22px;height:22px;border:2px solid #1a1a1a;transform:rotate(45deg)"></div>
+      <span style="font:19px 'Kalam',cursive;font-weight:700">VALOROAST</span>
+    </div>
+    <span style="font:13px 'Patrick Hand';color:#999">WANTED</span>
+  </div>
+
+  <div style="padding:16px;text-align:center;border-bottom:1px dashed #999">
+    <div style="font:20px 'Kalam',cursive;font-weight:700;line-height:1.2">DROP YOUR RIOT ID</div>
+    <div style="margin-top:10px;border:2px solid #1a1a1a;padding:8px 12px;font:14px 'Patrick Hand'">Username #TAG</div>
+    <div style="margin-top:8px;border:2px solid #1a1a1a;background:#c8102e;color:#fff;padding:8px 12px;font:15px 'Kalam',cursive">PUT UP THE POSTER</div>
+  </div>
+
+  <div style="padding:20px 16px;text-align:center;border-bottom:1px dashed #999">
+    <div style="width:100px;height:100px;border:3px solid #1a1a1a;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font:12px 'Patrick Hand';color:#999">badge medal</div>
+    <div style="font:16px 'Kalam',cursive;font-weight:700">"HARD STUCK HERO"</div>
+    <div style="margin-top:14px;transform:rotate(-3deg);display:inline-block;border:4px double #c8102e;color:#c8102e;font:22px 'Kalam',cursive;font-weight:700;padding:2px 14px">DEAD WEIGHT</div>
+    <div style="margin-top:12px;font:18px 'Kalam',cursive;line-height:1.4">"14% hs, 38% wr — reward for capture: one (1) coaching session."</div>
+  </div>
+
+  <div style="padding:12px 16px;display:flex;flex-wrap:wrap;justify-content:center;gap:6px;border-bottom:1px dashed #999">
+    <span class="tag">ACS 187</span><span class="tag">JETT</span><span class="tag">L L L W L</span>
+  </div>
+
+  <div style="padding:14px 16px;border-bottom:1px dashed #999;text-align:center">
+    <div style="font:12px 'Patrick Hand';color:#777;margin-bottom:6px">[LAST SEEN LOSING TO]</div>
+    <div style="font:15px 'Patrick Hand'">friend#TAG</div>
+    <div style="margin-top:6px;font:15px 'Patrick Hand';color:#2a7a3b;font-weight:700">rival: 241 acs · always the better wanted poster</div>
+  </div>
+
+  <div style="padding:12px 16px;display:flex;justify-content:center;gap:8px;border-bottom:1px dashed #999">
+    <div style="border:2px solid #1a1a1a;padding:7px 10px;font:14px 'Patrick Hand'">⬇ save</div>
+    <div style="border:2px solid #1a1a1a;padding:7px 10px;font:14px 'Patrick Hand'">copy link</div>
+  </div>
+  <div style="padding:10px 16px;text-align:center;font:12px 'Patrick Hand';color:#777">
+    take down poster — <span style="color:#999">warning: permanent</span>
+  </div>
+</div>
+</div>
+
+<div class="dv-opt" id="2c">
+<div class="dv-olabel"><a class="dv-oid" href="#2c">2c</a>Two-Column Precinct Board — form left, roast + badge + rival stacked right</div>
+<div class="dv-card" style="width:640px">
+  <div style="padding:16px 20px;border-bottom:2px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:26px;height:26px;border:2px solid #1a1a1a;transform:rotate(45deg)"></div>
+      <span style="font:22px 'Kalam',cursive;font-weight:700">VALOROAST</span>
+    </div>
+    <span style="font:15px 'Patrick Hand'">precinct board</span>
+  </div>
+  <div style="display:grid;grid-template-columns:220px 1fr">
+    <div style="padding:20px;border-right:1px dashed #999;display:flex;flex-direction:column;gap:14px">
+      <div style="font:18px 'Kalam',cursive;font-weight:700">FILE A REPORT ON YOURSELF</div>
+      <div style="border:2px solid #1a1a1a;padding:9px 12px;font:15px 'Patrick Hand'">Username #TAG</div>
+      <div style="border:2px solid #1a1a1a;background:#c8102e;color:#fff;padding:9px 12px;font:16px 'Kalam',cursive;text-align:center">FILE REPORT</div>
+      <div style="margin-top:auto;display:flex;flex-wrap:wrap;gap:6px">
+        <span class="tag">HS 14%</span><span class="tag">WR 38%</span><span class="tag">ACS 187</span><span class="tag">JETT</span><span class="tag">L L L W L</span>
+      </div>
+    </div>
+    <div style="padding:20px;display:flex;flex-direction:column;gap:14px">
+      <div style="position:relative;border:1px dashed #999;padding:14px;text-align:center">
+        <div style="position:absolute;top:-10px;right:10px;transform:rotate(10deg);border:3px solid #c8102e;color:#c8102e;font:16px 'Kalam',cursive;font-weight:700;padding:1px 8px">CASE CLOSED</div>
+        <div style="font:18px 'Kalam',cursive;line-height:1.4">"one-tap peeks with 14% hs — the aim assist you asked for never came."</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;border:1px dashed #999;padding:10px">
+        <div style="width:30px;height:30px;border:2px solid #1a1a1a;flex:none"></div>
+        <div style="font:15px 'Patrick Hand'">BADGE: <b>"ONE-TAP TO THE FOOT"</b></div>
+      </div>
+      <div style="border:1px dashed #999;padding:10px">
+        <div style="font:11px 'Patrick Hand';color:#777;margin-bottom:4px">[PARTNER PRECINCT — ALWAYS OUTRANKS YOU]</div>
+        <div style="display:flex;justify-content:space-between;font:15px 'Patrick Hand'"><span>you 187 acs</span><span style="color:#2a7a3b;font-weight:700">rival 241 acs — WINNER</span></div>
+      </div>
+      <div style="display:flex;gap:8px">
+        <div style="border:2px solid #1a1a1a;padding:7px 10px;font:14px 'Patrick Hand'">⬇ download</div>
+        <div style="border:2px solid #1a1a1a;padding:7px 10px;font:14px 'Patrick Hand'">copy link</div>
+        <div style="margin-left:auto;font:13px 'Patrick Hand';color:#777">delete report — permanent</div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "make <a class="dv-oid" href="#2c">2c</a> the desktop layout, mobile stacks like <a class="dv-oid" href="#2a">2a</a>" · "pick one direction and build the full site"</p>
+</section>
+
+<section class="dv-turn" id="t1">
+<div class="dv-thd"><a class="dv-tid" href="#t1">1</a><span class="dv-tname">Valorant Roast Site — 3 layout directions</span></div>
+<div class="dv-opts">
+
+<div class="dv-opt" id="1a">
+<div class="dv-olabel"><a class="dv-oid" href="#1a">1a</a>Dossier / Case File — dramatic stamped verdict</div>
+<div class="dv-card" style="width:420px">
+  <div style="padding:16px 18px;border-bottom:2px solid #1a1a1a;display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;align-items:center;gap:8px">
+      <div style="width:26px;height:26px;border:2px solid #1a1a1a;transform:rotate(45deg)"></div>
+      <span style="font:22px 'Kalam',cursive;font-weight:700">VALOROAST</span>
+    </div>
+    <span style="font:15px 'Patrick Hand'">how it works &nbsp; faq</span>
+  </div>
+
+  <div style="padding:22px 18px;text-align:center;border-bottom:1px dashed #999">
+    <div style="font:26px 'Kalam',cursive;font-weight:700;line-height:1.2">TYPE YOUR RIOT ID.<br>GET CLOWNED.</div>
+    <div style="margin-top:14px;display:flex;gap:8px;justify-content:center">
+      <div style="border:2px solid #1a1a1a;padding:10px 14px;font:16px 'Patrick Hand';width:180px;text-align:left">Username #TAG</div>
+      <div style="border:2px solid #1a1a1a;background:#c8102e;color:#fff;padding:10px 16px;font:18px 'Kalam',cursive">ROAST ME</div>
+    </div>
+    <div style="margin-top:8px;font:13px 'Patrick Hand';color:#777">[scanning stats... hs%, winrate, acs, agent, last 5]</div>
+  </div>
+
+  <div style="padding:20px 18px;position:relative;border-bottom:1px dashed #999">
+    <div style="position:absolute;top:8px;right:16px;transform:rotate(-12deg);border:3px solid #c8102e;color:#c8102e;font:20px 'Kalam',cursive;font-weight:700;padding:2px 10px">BUSTED</div>
+    <div style="font:12px 'Patrick Hand';color:#777;margin-bottom:6px">[CLASSIFIED VERDICT]</div>
+    <div style="font:19px 'Kalam',cursive;line-height:1.4">"14% headshots and you still one-tap peek mid?<br>bro's aiming with his feet."</div>
+  </div>
+
+  <div style="padding:14px 18px;display:flex;align-items:center;gap:10px;border-bottom:1px dashed #999">
+    <div style="width:34px;height:34px;border:2px solid #1a1a1a;flex:none" title="badge shape"></div>
+    <div style="font:16px 'Patrick Hand'">BADGE UNLOCKED: <b>"IRON WILL, DIAMOND EGO"</b></div>
+  </div>
+
+  <div style="padding:14px 18px;display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px dashed #999">
+    <span class="tag">HS 14%</span><span class="tag">WINRATE 38%</span><span class="tag">ACS 187</span><span class="tag">MAIN: JETT</span><span class="tag">L5: L L L W L</span>
+  </div>
+
+  <div style="padding:16px 18px;border-bottom:1px dashed #999">
+    <div style="font:12px 'Patrick Hand';color:#777;margin-bottom:6px">[SUMMON A RIVAL TO COMPARE]</div>
+    <div style="display:flex;gap:8px;font:15px 'Patrick Hand'">
+      <div style="border:2px solid #1a1a1a;padding:8px;flex:1">friend#TAG</div>
+      <div style="border:2px solid #1a1a1a;padding:8px;background:#eee">CHALLENGE</div>
+    </div>
+    <div style="margin-top:8px;display:flex;justify-content:space-between;font:15px 'Patrick Hand'">
+      <span>you: 187 acs ✗</span><span style="color:#2a7a3b;font-weight:700">rival: 241 acs — WINNER</span>
+    </div>
+    <div style="font:12px 'Patrick Hand';color:#999;margin-top:2px">[rival is generated to always edge you out]</div>
+  </div>
+
+  <div style="padding:14px 18px;display:flex;gap:8px;border-bottom:1px dashed #999">
+    <div style="border:2px solid #1a1a1a;padding:8px 12px;font:15px 'Patrick Hand'">⬇ download roast card</div>
+    <div style="border:2px solid #1a1a1a;padding:8px 12px;font:15px 'Patrick Hand'">copy link</div>
+  </div>
+
+  <div style="padding:12px 18px;text-align:center">
+    <span style="font:14px 'Patrick Hand';color:#777;text-decoration:underline">request roast deletion</span>
+    <div style="font:12px 'Patrick Hand';color:#999;border:1px dashed #999;display:inline-block;padding:4px 8px;margin-top:6px">note: plain warning text, "this is permanent and can't be undone"</div>
+  </div>
+</div>
+</div>
+
+<div class="dv-opt" id="1b">
+<div class="dv-olabel"><a class="dv-oid" href="#1b">1b</a>Post-Match Scoreboard — killfeed banner roast</div>
+<div class="dv-card" style="width:460px">
+  <div style="padding:14px 18px;background:#1a1a1a;color:#fff;display:flex;justify-content:space-between;align-items:center">
+    <span style="font:22px 'Kalam',cursive;font-weight:700">VALOROAST</span>
+    <span style="font:14px 'Patrick Hand'">POST-MATCH REPORT</span>
+  </div>
+
+  <div style="padding:18px;border-bottom:1px dashed #999;text-align:center">
+    <div style="font:16px 'Patrick Hand';margin-bottom:8px">LOCK IN YOUR RIOT ID TO GET SCOUTED</div>
+    <div style="display:flex;gap:8px;justify-content:center">
+      <div style="border:2px solid #1a1a1a;padding:9px 14px;font:15px 'Patrick Hand';width:170px">Username #TAG</div>
+      <div style="border:2px solid #1a1a1a;background:#c8102e;color:#fff;padding:9px 16px;font:16px 'Kalam',cursive">LOCK IN</div>
+    </div>
+  </div>
+
+  <div style="padding:10px 0;background:#c8102e;color:#fff;text-align:center;font:22px 'Kalam',cursive;font-weight:700;transform:skewX(-4deg);border-bottom:1px dashed #999">
+    "38% WINRATE — EVEN THE BOTS FEEL BAD FOR YOU"
+  </div>
+
+  <div style="padding:14px 18px">
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr 1fr;gap:4px;font:13px 'Patrick Hand';color:#777;border-bottom:1px solid #999;padding-bottom:4px">
+      <span>PLAYER</span><span>HS%</span><span>WIN%</span><span>ACS</span><span>AGENT</span><span>FORM</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr 1fr;gap:4px;font:15px 'Patrick Hand';background:rgba(200,16,46,.08);padding:6px 0;align-items:center">
+      <span style="display:flex;align-items:center;gap:5px">you <span style="width:16px;height:16px;border:1.5px solid #1a1a1a;display:inline-block"></span></span><span>14</span><span>38</span><span>187</span><span>Jett</span><span>L L L W L</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.2fr 1fr;gap:4px;font:15px 'Patrick Hand';color:#2a7a3b;padding:6px 0">
+      <span>rival</span><span>41</span><span>67</span><span>241</span><span>Reyna</span><span>W W W W L</span>
+    </div>
+    <div style="font:12px 'Patrick Hand';color:#999;margin-top:4px">[rival row auto-generated, always beats yours]</div>
+  </div>
+
+  <div style="padding:14px 18px;border-top:1px dashed #999;display:flex;gap:8px">
+    <div style="border:2px solid #1a1a1a;padding:8px 12px;font:15px 'Patrick Hand'">⬇ download card</div>
+    <div style="border:2px solid #1a1a1a;padding:8px 12px;font:15px 'Patrick Hand'">copy link</div>
+    <div style="margin-left:auto;font:15px 'Patrick Hand';display:flex;align-items:center;gap:5px">badge: <span style="width:20px;height:20px;border:2px solid #1a1a1a;border-radius:50%;display:inline-block"></span></div>
+  </div>
+
+  <div style="padding:10px 18px;text-align:center;font:13px 'Patrick Hand';color:#777">
+    delete my data — <span style="color:#999">warning: this can't be undone</span>
+  </div>
+</div>
+</div>
+
+<div class="dv-opt" id="1c">
+<div class="dv-olabel"><a class="dv-oid" href="#1c">1c</a>Chat / Meme Feed — mobile-first AI coach DM</div>
+<div class="dv-card" style="width:300px">
+  <div style="border:3px solid #1a1a1a;border-radius:22px;margin:10px;overflow:hidden">
+    <div style="padding:12px 14px;border-bottom:2px solid #1a1a1a;display:flex;align-items:center;gap:8px">
+      <div style="width:28px;height:28px;border-radius:50%;border:2px solid #1a1a1a"></div>
+      <div>
+        <div style="font:16px 'Kalam',cursive;font-weight:700">AI COACH</div>
+        <div style="font:11px 'Patrick Hand';color:#777">will read your stats & judge you</div>
+      </div>
+    </div>
+
+    <div style="padding:14px;display:flex;flex-direction:column;gap:10px;min-height:280px">
+      <div style="align-self:flex-end;background:#eee;border:1.5px solid #1a1a1a;border-radius:14px 14px 2px 14px;padding:8px 12px;font:14px 'Patrick Hand';max-width:80%">yo here's my tag: xXslayerXx#0001</div>
+
+      <div style="align-self:flex-start;background:#fff;border:1.5px solid #1a1a1a;border-radius:14px 14px 14px 2px;padding:10px 12px;font:16px 'Kalam',cursive;max-width:88%;position:relative">
+        "187 acs on jett and you still dying to util. clown behavior."
+        <div style="position:absolute;top:-10px;right:-10px;width:26px;height:26px;border:2px solid #c8102e;border-radius:50%"></div>
+      </div>
+      <div style="align-self:flex-start;font:12px 'Patrick Hand';color:#777;margin-top:-4px">🎖 new badge: "bot lobby graduate"</div>
+
+      <div style="align-self:flex-start;background:#fff;border:1.5px dashed #999;border-radius:10px;padding:8px 10px;font:12px 'Patrick Hand';max-width:88%">
+        stats used: HS 14% · WR 38% · ACS 187 · Jett · L5: LLLWL
+      </div>
+
+      <div style="align-self:center;width:100%;border:2px solid #1a1a1a;border-radius:10px;padding:10px;margin-top:4px">
+        <div style="font:12px 'Patrick Hand';color:#777;text-align:center;margin-bottom:6px">[SHAREABLE VS CARD]</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;font:14px 'Patrick Hand'">
+          <span>you: 187 acs</span><span style="font:18px 'Kalam',cursive">VS</span><span style="color:#2a7a3b;font-weight:700">friend: 241</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:2px solid #1a1a1a;padding:10px 14px;display:flex;gap:8px;align-items:center">
+      <div style="flex:1;border:2px solid #1a1a1a;border-radius:16px;padding:8px 12px;font:14px 'Patrick Hand';color:#999">Username #TAG</div>
+      <div style="width:32px;height:32px;border:2px solid #1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;font:16px">➤</div>
+    </div>
+    <div style="padding:8px 14px 14px;display:flex;justify-content:space-between;font:13px 'Patrick Hand';color:#777">
+      <span>⬇ save image</span><span>copy link</span><span>⋮ delete (warns you first)</span>
+    </div>
+  </div>
+</div>
+</div>
+
+</div>
+<p class="dv-next">Try next: "combine <a class="dv-oid" href="#1a">1a</a>'s stamp reveal with <a class="dv-oid" href="#1b">1b</a>'s scoreboard rival row" · "make <a class="dv-oid" href="#1c">1c</a> the desktop layout too" · "show more badge examples"</p>
+</section>
+
+</x-dc>
+</body>
+</html>
