@@ -43,6 +43,9 @@
   --font-condensed: var(--font-barlow-condensed), sans-serif;
   --font-display: var(--font-anton), sans-serif;
 
+  --text-xxs: 0.625rem;
+  --text-xxs--line-height: 0.875rem;
+
   --animate-pop: pop 0.22s ease both;
   --animate-sweep: sweep 1.1s linear infinite;
   --animate-stamp: stamp 0.5s cubic-bezier(0.2, 1.4, 0.4, 1) both;

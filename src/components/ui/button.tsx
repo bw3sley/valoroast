@@ -20,9 +20,9 @@ const buttonVariants = tv({
       link: "font-semibold text-faint-foreground underline hover:text-foreground",
     },
     size: {
-      sm: "h-10 px-4.5 text-[13px] tracking-[0.12em] [&_svg]:size-3.5",
-      md: "h-11 px-5.5 text-[15px] tracking-[0.1em] [&_svg]:size-4",
-      lg: "h-14 px-7.5 text-[19px] tracking-[0.1em] [&_svg]:size-5",
+      sm: "h-10 px-4.5 text-xs tracking-widest [&_svg]:size-3.5",
+      md: "h-11 px-5.5 text-sm tracking-widest [&_svg]:size-4",
+      lg: "h-14 px-7.5 text-xl tracking-widest [&_svg]:size-5",
       icon: "size-8.5 p-0 [&_svg]:size-4",
     },
   },

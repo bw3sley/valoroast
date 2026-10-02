@@ -9,12 +9,11 @@ import { cn } from "@/lib/utils";
 
 import { Button } from "./button";
 
-const dialogOverlayClassName =
-  "fixed inset-0 z-60 bg-overlay backdrop-blur-[3px]";
+const dialogOverlayClassName = "fixed inset-0 z-60 bg-overlay backdrop-blur-xs";
 
 const dialogContentVariants = tv({
   base: [
-    "fixed top-1/2 left-1/2 z-60 max-h-[90vh] w-[calc(100%-40px)] -translate-x-1/2 -translate-y-1/2 overflow-auto",
+    "fixed inset-x-5 top-1/2 z-60 mx-auto max-h-9/10 w-auto -translate-y-1/2 overflow-auto",
     "border-t-4 border-primary bg-card text-foreground outline-none",
     "data-[state=open]:animate-pop",
   ],
@@ -24,7 +23,7 @@ const dialogContentVariants = tv({
     },
     size: {
       sm: "max-w-115 p-7",
-      md: "max-w-130 p-[clamp(22px,3vw,32px)]",
+      md: "max-w-130 p-5.5 md:p-7 lg:p-8",
     },
   },
   defaultVariants: {
@@ -73,7 +72,7 @@ function DialogContent({
               variant="secondary"
               size="icon"
               aria-label="Close"
-              className="absolute top-[clamp(22px,3vw,32px)] right-[clamp(22px,3vw,32px)] text-muted-foreground hover:bg-primary hover:text-primary-foreground"
+              className="absolute top-5.5 right-5.5 text-muted-foreground hover:bg-primary hover:text-primary-foreground md:top-7 md:right-7 lg:top-8 lg:right-8"
             >
               <X />
             </Button>
@@ -94,7 +93,7 @@ function DialogTitle({ className, ...props }: DialogTitleProps) {
   return (
     <DialogPrimitive.Title
       className={cn(
-        "font-display text-[clamp(24px,3.4vw,32px)] uppercase tracking-[0.02em]",
+        "font-display text-2xl uppercase tracking-wide md:text-3xl",
         className,
       )}
       {...props}

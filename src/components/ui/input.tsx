@@ -17,7 +17,7 @@ const inputRootVariants = tv({
     },
     size: {
       md: "h-12.5 gap-2.5 px-4 text-base",
-      lg: "h-14.5 gap-2.5 px-4.5 text-[17px]",
+      lg: "h-14.5 gap-2.5 px-4.5 text-base",
     },
   },
   defaultVariants: {
@@ -48,7 +48,7 @@ function InputAddon({ className, ...props }: InputAddonProps) {
   return (
     <span
       className={cn(
-        "shrink-0 font-condensed font-bold tracking-[0.06em] text-faint-foreground [&_svg]:size-4",
+        "shrink-0 font-condensed font-bold tracking-wider text-faint-foreground [&_svg]:size-4",
         className,
       )}
       {...props}
@@ -60,7 +60,7 @@ function InputControl({ className, ...props }: InputControlProps) {
   return (
     <input
       className={cn(
-        "h-full min-w-0 flex-1 bg-transparent font-medium tracking-[0.02em] text-inherit outline-none disabled:cursor-not-allowed",
+        "h-full min-w-0 flex-1 bg-transparent font-medium tracking-wide text-inherit outline-none disabled:cursor-not-allowed",
         className,
       )}
       {...props}
@@ -72,7 +72,7 @@ function InputDescription({ className, ...props }: InputDescriptionProps) {
   return (
     <p
       className={cn(
-        "font-condensed text-sm uppercase tracking-[0.08em] text-faint-foreground",
+        "font-condensed text-sm uppercase tracking-widest text-faint-foreground",
         className,
       )}
       {...props}
@@ -84,7 +84,7 @@ function InputError({ className, ...props }: InputErrorProps) {
   return (
     <p
       className={cn(
-        "font-condensed text-sm font-semibold uppercase tracking-[0.08em] text-destructive",
+        "font-condensed text-sm font-semibold uppercase tracking-widest text-destructive",
         className,
       )}
       role="alert"

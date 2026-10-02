@@ -13,8 +13,8 @@ const eyebrowVariants = tv({
       faint: "text-faint-foreground",
     },
     size: {
-      sm: "text-xs tracking-[0.18em]",
-      md: "text-[13px] tracking-[0.18em]",
+      sm: "text-xs tracking-widest",
+      md: "text-sm tracking-widest",
     },
   },
   defaultVariants: {

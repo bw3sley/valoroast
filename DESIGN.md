@@ -59,7 +59,7 @@ The visual language borrows from Valorant's own UI: a dark slate canvas, a singl
 Loaded with `next/font/google` in `src/app/layout.tsx`:
 
 - **Display** (`font-display`): **Anton** — headlines, the roast line, stat values, verdict stamp, dialog titles. Always uppercase.
-- **Condensed** (`font-condensed`): **Barlow Condensed** (500–700) — buttons, kicker labels, badges, hints, toasts. Uppercase with wide tracking (`0.08em`–`0.2em`).
+- **Condensed** (`font-condensed`): **Barlow Condensed** (500–700) — buttons, kicker labels, badges, hints, toasts. Uppercase with Tailwind's `tracking-wider` or `tracking-widest` utilities.
 - **Body** (`font-sans`): **Barlow** (400–600) — paragraphs and input text.
 
 ### Hierarchy
@@ -77,10 +77,12 @@ Loaded with `next/font/google` in `src/app/layout.tsx`:
 ## Layout
 
 ### Spacing System
-Valoroast follows Tailwind's spacing scale, using the prototype's values where they differ.
+Valoroast follows Tailwind's spacing scale. Shared primitives use the closest utility to the prototype's value.
+
+Shared UI primitives use the closest Tailwind typography and spacing utilities. Responsive primitive sizes use breakpoint utilities instead of one-off `clamp()` values. The 10px text size is available as `text-xxs`.
 
 - Tight control spacing: `gap-2` to `gap-2.5`
-- Card internal padding: `px-4.5 py-4` (tiles) up to `clamp(28px, 4vw, 44px)` (verdict card)
+- Card internal padding: `px-4.5 py-4` (tiles) up to `p-7 md:p-8 lg:p-11` (verdict card)
 - Page gutter: `clamp(16px, 4vw, 48px)`
 
 ### Page Structure

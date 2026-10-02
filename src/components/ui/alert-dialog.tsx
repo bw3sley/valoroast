@@ -64,7 +64,7 @@ function AlertDialogFooter({ className, ...props }: AlertDialogFooterProps) {
 function AlertDialogTitle({ className, ...props }: AlertDialogTitleProps) {
   return (
     <AlertDialogPrimitive.Title
-      className={cn("font-display text-[26px] uppercase", className)}
+      className={cn("font-display text-2xl uppercase", className)}
       {...props}
     />
   );
@@ -77,7 +77,7 @@ function AlertDialogDescription({
   return (
     <AlertDialogPrimitive.Description
       className={cn(
-        "mt-2.5 text-[15px] leading-relaxed text-muted-foreground",
+        "mt-2.5 text-sm leading-relaxed text-muted-foreground",
         className,
       )}
       {...props}

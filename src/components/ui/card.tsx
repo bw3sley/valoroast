@@ -16,7 +16,7 @@ const cardVariants = tv({
     size: {
       sm: "px-4.5 py-4",
       md: "px-7 py-8.5",
-      lg: "p-[clamp(28px,4vw,44px)]",
+      lg: "p-7 md:p-8 lg:p-11",
     },
   },
   defaultVariants: {

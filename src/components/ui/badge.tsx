@@ -12,7 +12,7 @@ const badgeVariants = tv({
     },
     size: {
       sm: "h-7.5 min-w-6.5 px-1 font-display text-base [&_svg]:size-3.5",
-      md: "gap-2.5 px-4 py-1.75 font-condensed text-[13px] font-semibold uppercase tracking-[0.2em] [&_svg]:size-2",
+      md: "gap-2.5 px-4 py-1.75 font-condensed text-xs font-semibold uppercase tracking-widest [&_svg]:size-2",
     },
   },
   defaultVariants: {
