@@ -25,6 +25,9 @@ npm run build         # production build (includes type-check)
 npm run start         # serve the production build
 npm run lint          # lint + format check via Biome
 npm run format        # format via Biome
+npm run db:generate   # generate a SQL migration from src/db/schema
+npm run db:migrate    # apply migrations to DATABASE_URL (Neon)
+npm run db:studio     # Drizzle Studio
 ```
 
 ## Stack
@@ -35,6 +38,11 @@ npm run format        # format via Biome
 - **Variants** - `tailwind-variants` + `cn()` (`clsx` + `tailwind-merge`)
 - **Fonts** - `next/font/google`: Anton (display), Barlow Condensed (labels/actions), Barlow (body)
 - **Icons** - Lucide React
+- **AI** - Vercel `ai` SDK + `@ai-sdk/openai` (server-only, `src/http/functions/generate-roast.ts`)
+- **Data fetching** - `@tanstack/react-query` mutations calling our own `/api/*` route handlers
+- **State** - Zustand + Immer stores in `src/store/`
+- **Database** - Neon Postgres via Drizzle ORM (`pg` driver), Zod validators from `drizzle-zod`; tables are plural and every column is snake_case in SQL and in the TS schema
+- **Player data** - HenrikDev unofficial Valorant API, called server-side only
 - **Notifications** - Sonner
 - **Linting / formatting** - Biome
 - **Language** - TypeScript 5
@@ -45,17 +53,48 @@ npm run format        # format via Biome
 public/               # static assets served from `/`
 src/
   app/
-    layout.tsx        # root layout, fonts, metadata
-    page.tsx          # home screen
+    layout.tsx        # root layout, fonts, metadata, QueryProvider, Toaster
+    api/
+      roast/route.ts  # POST { riotId } -> real stats + OpenAI roast
+      rival/route.ts  # POST { riotId } -> rival stats only
     globals.css       # global styles and theme tokens
+    (roasts)/         # pathless route group for the app, serves `/`
+      layout.tsx      # header, footer, dialogs, RoastFlowProvider
+      page.tsx        # home screen (hero, scan, result)
   components/
+    AGENTS.md         # source of truth for UI component rules
     ui/               # reusable UI primitives
-      AGENTS.md       # source of truth for UI component rules
-  lib/                # utilities like `cn()`
+    *.tsx             # Valoroast feature components (header, roast-form, verdict-card, dialogs...)
+  contexts/           # providers + consumer hooks (query-provider, roast-flow-context)
+  hooks/              # reusable hooks (use-roast-flow-state)
+  db/
+    client.ts         # server-only pg Pool + drizzle instance
+    schema/           # one file per table (roasts, roast-challenges)
+    validators/       # drizzle-zod insert/select schemas
+    queries/          # one query helper per file (create-roast, find-roast-by-id, ...)
+  constants/          # static values: badges, verdicts, scan lines, Henrik/OpenAI config, error messages
+  http/
+    errors/           # one server-only error class per file (app-error, player-not-found-error, ...)
+    functions/        # every function that makes an HTTP/API call (Henrik + OpenAI server-only, request-* client)
+    schemas/          # zod schemas for requests and external API responses
+  lib/
+    utils.ts          # `cn()` - the only file allowed in lib/
+  store/              # zustand + immer stores (roast-flow-store)
+  types/              # shared TypeScript types (roast)
+  utils/              # pure helpers (compare, player stats calculation, case number, error-response, canvas card download)
+drizzle/               # generated SQL migrations (commit them)
+drizzle.config.ts     # drizzle-kit config, reads DATABASE_URL from `.env.local`
+.env.example          # required env vars; copy to `.env.local`
 README.md             # project overview
 DESIGN.md             # product and design system guidance
 CLAUDE.md             # points agents back to this file
 ```
+
+## Environment
+
+Copy `.env.example` to `.env.local` and fill in `OPENAI_API_KEY`, `OPENAI_MODEL` (optional) and
+`DATABASE_URL` (Neon connection string with `?sslmode=require`), `HENRIKDEV_API_KEY` (free Basic key, 30 req/min, from https://api.henrikdev.xyz/dashboard/). Keys
+are read only on the server; server API functions in `http/functions/` and every file in `http/errors/` import `server-only`.
 
 ## Path Aliases
 
@@ -83,8 +122,9 @@ For UI, layout, styling, and visual refinement work, read and follow `@DESIGN.md
 
 ## Key Conventions
 
+- `src/lib/` holds only `utils.ts`; new code goes in `constants/`, `http/`, `store/`, `types/` or `utils/`.
 - Reusable UI belongs in `src/components/ui/`.
-- Component rules for `src/components/ui/` live in `src/components/ui/AGENTS.md` and must be followed.
+- Component rules for `src/components/ui/` live in `src/components/AGENTS.md` and must be followed.
 - Use `cn()` from `src/lib/utils.ts` for class merging.
 - Use semantic Tailwind tokens like `bg-background`, `text-foreground`, `border-border`, and `ring-ring` instead of hardcoded colors in components.
 - Prefer Radix primitives for accessibility-sensitive controls such as dialogs, menus, popovers, and selects.

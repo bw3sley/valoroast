@@ -127,7 +127,7 @@ Prototype motion still to port with its feature components: the verdict stamp sl
 ## Components
 
 ### UI Primitive Direction
-Reusable components live in `src/components/ui/` and follow `src/components/ui/AGENTS.md`. They must stay generic — no Valoroast business meaning inside them.
+Reusable components live in `src/components/ui/` and follow `src/components/AGENTS.md`. They must stay generic — no Valoroast business meaning inside them.
 
 Current primitive families:
 - **Button** for every action (default red, secondary, inverse, soft, link)
@@ -138,6 +138,15 @@ Current primitive families:
 - **Separator** for dividers
 - **Dialog** and **AlertDialog** for compare and delete confirmation
 - **Toaster** (Sonner) for feedback
+
+### Feature Components
+Valoroast-specific components live in `src/components/` above the primitive layer and compose the primitives:
+- **Page chrome:** `logo`, `header`, `footer`
+- **Intake:** `hero`, `roast-form` (react-hook-form + zod), `scan-panel`
+- **Result:** `roast-result`, `verdict-card`, `verdict-stamp`, `badge-emblem`, `stat-tile`, `match-form`, `result-actions`
+- **Overlays:** `challenge-friend-dialog` (with `compare-row`), `delete-roast-dialog`
+
+Form schemas live inside the form components. Shared flow state (view, roast, rival, dialog flags) comes from `RoastFlowProvider` in `src/contexts/`.
 
 ### Component Principles
 - Use semantic token classes, not hardcoded hex values.
