@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Anton, Barlow, Barlow_Condensed } from "next/font/google";
 
 import { Toaster } from "@/components/ui/sonner";
+import { QueryProvider } from "@/contexts/query-provider";
 
 import "./globals.css";
 
@@ -37,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${anton.variable} ${barlow.variable} ${barlowCondensed.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {children}
+        <QueryProvider>{children}</QueryProvider>
         <Toaster />
       </body>
     </html>
