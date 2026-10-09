@@ -11,12 +11,18 @@ export async function POST(request: Request) {
     const body = rivalRequestSchema.safeParse(
       await request.json().catch(() => null),
     );
-    if (!body.success) throw new InvalidRequestError("Use Username#TAG");
+
+    if (!body.success) {
+      throw new InvalidRequestError("Use Username#TAG");
+    }
 
     const { name, tag, roastId } = body.data;
 
     const roast = await findRoastById(roastId);
-    if (!roast) throw new InvalidRequestError("Roast not found");
+
+    if (!roast) {
+      throw new InvalidRequestError("Roast not found");
+    }
 
     const { stats, account } = await getPlayerStats(name, tag);
 

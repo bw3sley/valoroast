@@ -11,10 +11,14 @@ export async function GET(
 ) {
   try {
     const id = z.uuid().safeParse((await params).id);
-    if (!id.success) throw new InvalidRequestError("Roast not found");
+    if (!id.success) {
+      throw new InvalidRequestError("Roast not found");
+    }
 
     const roast = await findRoastById(id.data);
-    if (!roast) throw new InvalidRequestError("Roast not found");
+    if (!roast) {
+      throw new InvalidRequestError("Roast not found");
+    }
 
     return Response.json(toRoastResponse(roast));
   } catch (error) {

@@ -43,7 +43,9 @@ export function useRoastFlowState() {
   // biome-ignore lint/correctness/useExhaustiveDependencies: run once on mount
   useEffect(() => {
     const id = new URLSearchParams(location.search).get("r");
-    if (!id) return;
+    if (!id) {
+      return;
+    }
     requestSharedRoast(id).then(showResult, (error) =>
       toast.error(errorMessage(error)),
     );
@@ -52,7 +54,9 @@ export function useRoastFlowState() {
   const scanning = roastMutation.isPending;
 
   useEffect(() => {
-    if (!scanning) return;
+    if (!scanning) {
+      return;
+    }
     const interval = setInterval(tickScan, SCAN_LINE_INTERVAL_MS);
     return () => clearInterval(interval);
   }, [scanning, tickScan]);
@@ -63,7 +67,9 @@ export function useRoastFlowState() {
   }
 
   function challenge(name: string) {
-    if (!roast) return;
+    if (!roast) {
+      return;
+    }
     rivalMutation.mutate(name);
   }
 
@@ -83,7 +89,9 @@ export function useRoastFlowState() {
   }
 
   async function downloadCard() {
-    if (!roast) return;
+    if (!roast) {
+      return;
+    }
     await downloadRoastCard(roast);
     toast("Card downloaded");
   }

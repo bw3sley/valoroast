@@ -47,7 +47,9 @@ export async function downloadRoastCard(roast: Roast) {
   canvas.width = SIZE;
   canvas.height = SIZE;
   const ctx = canvas.getContext("2d");
-  if (!ctx) return;
+  if (!ctx) {
+    return;
+  }
 
   ctx.fillStyle = background;
   ctx.fillRect(0, 0, SIZE, SIZE);

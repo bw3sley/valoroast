@@ -16,7 +16,7 @@ export function RoastResult({ roast }: { roast: Roast }) {
         <Eyebrow className="ml-auto">{roast.caseNo}</Eyebrow>
       </div>
       <VerdictCard roast={roast} />
-      <div className="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+      <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
         <StatTile label="Headshot %" value={`${roast.hs}%`} />
         <StatTile label="Winrate" value={`${roast.wr}%`} />
         <StatTile label="Avg combat score" value={roast.acs} />

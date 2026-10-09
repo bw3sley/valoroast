@@ -7,8 +7,8 @@ export function Footer() {
   const { setDeleteOpen } = useRoastFlow();
 
   return (
-    <footer className="flex flex-wrap items-center justify-between gap-3.5 border-t border-border px-4 md:px-8 lg:px-12 py-6">
-      <p className="max-w-2xl text-sm leading-relaxed text-faint-foreground">
+    <footer className="flex flex-wrap items-center justify-between gap-3.5 border-border border-t px-4 py-6 md:px-8 lg:px-12">
+      <p className="max-w-2xl text-faint-foreground text-sm leading-relaxed">
         We store your Riot ID, the fetched stats and the generated roast so your
         share link keeps working. Request deletion any time — it removes the
         roast and its link permanently and cannot be undone.
@@ -23,7 +23,7 @@ export function Footer() {
         >
           Delete my roast
         </Button>
-        <span className="font-condensed text-sm tracking-wider text-faint-foreground uppercase">
+        <span className="font-condensed text-faint-foreground text-sm uppercase tracking-wider">
           Not affiliated with Riot Games
         </span>
       </div>

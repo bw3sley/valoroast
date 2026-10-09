@@ -90,7 +90,7 @@ export function ChallengeFriendDialog() {
 
         {roast && rival && (
           <div className="mt-5 animate-in">
-            <div className="flex justify-between font-condensed text-sm uppercase tracking-wider text-muted-foreground">
+            <div className="flex justify-between font-condensed text-muted-foreground text-sm uppercase tracking-wider">
               <span>{roast.name.toUpperCase()}</span>
               <span className="text-success">
                 {rival.rival.name.toUpperCase()}
@@ -102,10 +102,10 @@ export function ChallengeFriendDialog() {
               ))}
             </div>
             <Card variant="success" size="sm" className="mt-4">
-              <div className="font-display text-xl uppercase text-success">
+              <div className="font-display text-success text-xl uppercase">
                 {rival.outcome.winner.toUpperCase()} wins
               </div>
-              <div className="mt-1 text-sm leading-normal text-muted-foreground">
+              <div className="mt-1 text-muted-foreground text-sm leading-normal">
                 {rival.outcome.taunt}
               </div>
             </Card>

@@ -8,10 +8,10 @@ const cardVariants = tv({
   variants: {
     variant: {
       default: "",
-      accent: "border-l-3 border-primary",
+      accent: "border-primary border-l-3",
       feature:
-        "overflow-hidden border-l-4 border-primary bg-linear-to-b from-foreground/3 to-transparent",
-      success: "border-l-3 border-success bg-success/9",
+        "overflow-hidden border-primary border-l-4 bg-linear-to-b from-foreground/3 to-transparent",
+      success: "border-success border-l-3 bg-success/9",
     },
     size: {
       sm: "px-4.5 py-4",

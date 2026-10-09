@@ -13,7 +13,9 @@ export async function POST(request: Request) {
     const body = riotIdRequestSchema.safeParse(
       await request.json().catch(() => null),
     );
-    if (!body.success) throw new InvalidRequestError("Use Username#TAG");
+    if (!body.success) {
+      throw new InvalidRequestError("Use Username#TAG");
+    }
 
     const { name, tag } = body.data;
 
@@ -21,7 +23,10 @@ export async function POST(request: Request) {
     const cached = await findRecentRoastByDedupeKey(
       buildDedupeKey({ riot_game_name: name, riot_tag_line: tag }),
     );
-    if (cached) return Response.json(toRoastResponse(cached));
+
+    if (cached) {
+      return Response.json(toRoastResponse(cached));
+    }
 
     const { stats, account } = await getPlayerStats(name, tag);
     const output = await generateRoast(`${account.name}#${account.tag}`, stats);

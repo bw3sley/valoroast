@@ -13,7 +13,9 @@ export async function henrikFetch<T extends z.ZodType>(
   params?: Record<string, string | number>,
 ): Promise<z.infer<T>> {
   const key = process.env.HENRIKDEV_API_KEY;
-  if (!key) throw new UpstreamError("HENRIKDEV_API_KEY is not set");
+  if (!key) {
+    throw new UpstreamError("HENRIKDEV_API_KEY is not set");
+  }
 
   const url = new URL(`${HENRIK_BASE_URL}${path}`);
   for (const [name, value] of Object.entries(params ?? {})) {
@@ -26,12 +28,20 @@ export async function henrikFetch<T extends z.ZodType>(
     cache: "no-store",
   });
 
-  if (response.status === 404) throw new PlayerNotFoundError();
-  if (response.status === 429) throw new RateLimitedError();
-  if (!response.ok) throw new UpstreamError(`Henrik API ${response.status}`);
+  if (response.status === 404) {
+    throw new PlayerNotFoundError();
+  }
+  if (response.status === 429) {
+    throw new RateLimitedError();
+  }
+  if (!response.ok) {
+    throw new UpstreamError(`Henrik API ${response.status}`);
+  }
 
   const body = (await response.json()) as { data: unknown };
   const parsed = schema.safeParse(body.data);
-  if (!parsed.success) throw new UpstreamError("Unexpected Henrik response");
+  if (!parsed.success) {
+    throw new UpstreamError("Unexpected Henrik response");
+  }
   return parsed.data;
 }

@@ -11,7 +11,7 @@ export function VerdictCard({ roast }: { roast: Roast }) {
     <Card size="lg" variant="feature">
       <VerdictStamp word={roast.verdict} />
       <Eyebrow variant="primary">Verdict</Eyebrow>
-      <p className="mt-3.5 max-w-3xl text-pretty font-display text-xl leading-tight md:text-3xl lg:text-4xl tracking-wide">
+      <p className="mt-3.5 max-w-3xl text-pretty font-display text-xl leading-tight tracking-wide md:text-3xl lg:text-4xl">
         {roast.roast}
       </p>
       <Separator className="mt-8" />
@@ -21,7 +21,7 @@ export function VerdictCard({ roast }: { roast: Roast }) {
           <Eyebrow size="sm" variant="success">
             Badge unlocked
           </Eyebrow>
-          <div className="font-display text-lg md:text-2xl uppercase">
+          <div className="font-display text-lg uppercase md:text-2xl">
             {badge.name}
           </div>
           <p className="text-muted-foreground text-sm">{badge.description}</p>

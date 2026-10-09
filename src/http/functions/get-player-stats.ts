@@ -13,6 +13,8 @@ export async function getPlayerStats(name: string, tag: string) {
   const matches = await getHenrikMatches(affinity, name, tag);
 
   const stats = calculatePlayerStats(account.puuid, matches);
-  if (!stats) throw new NoMatchesError();
+  if (!stats) {
+    throw new NoMatchesError();
+  }
   return { stats, account };
 }

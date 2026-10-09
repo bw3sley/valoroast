@@ -77,7 +77,7 @@ function AlertDialogDescription({
   return (
     <AlertDialogPrimitive.Description
       className={cn(
-        "mt-2.5 text-sm leading-relaxed text-muted-foreground",
+        "mt-2.5 text-muted-foreground text-sm leading-relaxed",
         className,
       )}
       {...props}

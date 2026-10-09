@@ -19,11 +19,15 @@ export function calculatePlayerStats(
 
   for (const match of matches) {
     const player = match.players.find((entry) => entry.puuid === puuid);
-    if (!player) continue;
+    if (!player) {
+      continue;
+    }
 
     const won =
       match.teams.find((team) => team.team_id === player.team_id)?.won ?? false;
-    if (won) wins++;
+    if (won) {
+      wins++;
+    }
     results.push(won ? "W" : "L");
 
     score += player.stats.score;
@@ -36,7 +40,9 @@ export function calculatePlayerStats(
     agents.set(player.agent.name, (agents.get(player.agent.name) ?? 0) + 1);
   }
 
-  if (results.length === 0) return null;
+  if (results.length === 0) {
+    return null;
+  }
 
   const [agent] = [...agents.entries()].sort((a, b) => b[1] - a[1])[0];
 

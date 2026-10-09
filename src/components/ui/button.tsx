@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = tv({
   base: [
-    "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap font-condensed font-bold uppercase transition-colors",
+    "inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap font-bold font-condensed uppercase transition-colors",
     "outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
     "disabled:pointer-events-none disabled:opacity-50",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0",

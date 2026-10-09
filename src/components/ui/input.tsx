@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 
 const inputRootVariants = tv({
   base: [
-    "flex w-full items-center border-l-3 border-primary text-foreground transition-shadow",
+    "flex w-full items-center border-primary border-l-3 text-foreground transition-shadow",
     "focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2 focus-within:ring-offset-background",
     "has-[input:disabled]:opacity-50",
     "has-[[aria-invalid=true]]:bg-destructive/10 has-[[aria-invalid=true]]:ring-1 has-[[aria-invalid=true]]:ring-destructive",
@@ -48,7 +48,7 @@ function InputAddon({ className, ...props }: InputAddonProps) {
   return (
     <span
       className={cn(
-        "shrink-0 font-condensed font-bold tracking-wider text-faint-foreground [&_svg]:size-4",
+        "shrink-0 font-bold font-condensed text-faint-foreground tracking-wider [&_svg]:size-4",
         className,
       )}
       {...props}
@@ -60,7 +60,7 @@ function InputControl({ className, ...props }: InputControlProps) {
   return (
     <input
       className={cn(
-        "h-full min-w-0 flex-1 bg-transparent font-medium tracking-wide text-inherit outline-none disabled:cursor-not-allowed",
+        "h-full min-w-0 flex-1 bg-transparent font-medium text-inherit tracking-wide outline-none disabled:cursor-not-allowed",
         className,
       )}
       {...props}
@@ -72,7 +72,7 @@ function InputDescription({ className, ...props }: InputDescriptionProps) {
   return (
     <p
       className={cn(
-        "font-condensed text-sm uppercase tracking-widest text-faint-foreground",
+        "font-condensed text-faint-foreground text-sm uppercase tracking-widest",
         className,
       )}
       {...props}
@@ -84,7 +84,7 @@ function InputError({ className, ...props }: InputErrorProps) {
   return (
     <p
       className={cn(
-        "font-condensed text-sm font-semibold uppercase tracking-widest text-destructive",
+        "font-condensed font-semibold text-destructive text-sm uppercase tracking-widest",
         className,
       )}
       role="alert"

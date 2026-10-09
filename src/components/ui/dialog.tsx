@@ -14,7 +14,7 @@ const dialogOverlayClassName = "fixed inset-0 z-60 bg-overlay backdrop-blur-xs";
 const dialogContentVariants = tv({
   base: [
     "fixed inset-x-5 top-1/2 z-60 mx-auto max-h-9/10 w-auto -translate-y-1/2 overflow-auto",
-    "border-t-4 border-primary bg-card text-foreground outline-none",
+    "border-primary border-t-4 bg-card text-foreground outline-none",
     "data-[state=open]:animate-pop",
   ],
   variants: {
@@ -105,7 +105,7 @@ function DialogDescription({ className, ...props }: DialogDescriptionProps) {
   return (
     <DialogPrimitive.Description
       className={cn(
-        "mt-2.5 text-sm leading-normal text-muted-foreground",
+        "mt-2.5 text-muted-foreground text-sm leading-normal",
         className,
       )}
       {...props}

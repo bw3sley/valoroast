@@ -22,7 +22,19 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "style": {
+        "useBlockStatements": "error"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "error",
+          "fix": "unsafe",
+          "options": {
+            "functions": ["cn", "tv", "clsx", "twMerge"]
+          }
+        }
+      }
     },
     "domains": {
       "next": "recommended",
