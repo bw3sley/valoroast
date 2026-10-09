@@ -1,0 +1,312 @@
+{
+  "id": "35fb2858-6af8-48bd-9707-f85ace7a9844",
+  "prevId": "d1b2753f-5017-411c-8ac3-c5354c441eba",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.roast_challenges": {
+      "name": "roast_challenges",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "roast_id": {
+          "name": "roast_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "opponent_riot_game_name": {
+          "name": "opponent_riot_game_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "opponent_riot_tag_line": {
+          "name": "opponent_riot_tag_line",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "challenge_text": {
+          "name": "challenge_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "roast_challenges_roast_id_idx": {
+          "name": "roast_challenges_roast_id_idx",
+          "columns": [
+            {
+              "expression": "roast_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "roast_challenges_roast_id_roasts_id_fk": {
+          "name": "roast_challenges_roast_id_roasts_id_fk",
+          "tableFrom": "roast_challenges",
+          "tableTo": "roasts",
+          "columnsFrom": [
+            "roast_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.roasts": {
+      "name": "roasts",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true,
+          "default": "gen_random_uuid()"
+        },
+        "delete_token_hash": {
+          "name": "delete_token_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "request_idempotency_key_hash": {
+          "name": "request_idempotency_key_hash",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "dedupe_key": {
+          "name": "dedupe_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "riot_game_name": {
+          "name": "riot_game_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "riot_tag_line": {
+          "name": "riot_tag_line",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "region": {
+          "name": "region",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "case_no": {
+          "name": "case_no",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "headshot_percentage": {
+          "name": "headshot_percentage",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "winrate_percentage": {
+          "name": "winrate_percentage",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "average_combat_score": {
+          "name": "average_combat_score",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kd": {
+          "name": "kd",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "most_used_agent": {
+          "name": "most_used_agent",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "last_match_results": {
+          "name": "last_match_results",
+          "type": "text[]",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "verdict": {
+          "name": "verdict",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "roast_text": {
+          "name": "roast_text",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "badge_name": {
+          "name": "badge_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "badge_glyph": {
+          "name": "badge_glyph",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "badge_description": {
+          "name": "badge_description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "roast_intensity": {
+          "name": "roast_intensity",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "stats_source_provider": {
+          "name": "stats_source_provider",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "roasts_request_idempotency_key_hash_idx": {
+          "name": "roasts_request_idempotency_key_hash_idx",
+          "columns": [
+            {
+              "expression": "request_idempotency_key_hash",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": true,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "roasts_dedupe_key_created_at_idx": {
+          "name": "roasts_dedupe_key_created_at_idx",
+          "columns": [
+            {
+              "expression": "dedupe_key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": false,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "roasts_created_at_idx": {
+          "name": "roasts_created_at_idx",
+          "columns": [
+            {
+              "expression": "created_at",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "roasts_headshot_percentage_range": {
+          "name": "roasts_headshot_percentage_range",
+          "value": "\"roasts\".\"headshot_percentage\" between 0 and 100"
+        },
+        "roasts_winrate_percentage_range": {
+          "name": "roasts_winrate_percentage_range",
+          "value": "\"roasts\".\"winrate_percentage\" between 0 and 100"
+        },
+        "roasts_last_match_results_valid": {
+          "name": "roasts_last_match_results_valid",
+          "value": "cardinality(\"roasts\".\"last_match_results\") <= 5 and \"roasts\".\"last_match_results\" <@ array['W', 'L']::text[]"
+        }
+      },
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

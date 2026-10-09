@@ -7,7 +7,10 @@ import { toast } from "sonner";
 import { SCAN_LINE_INTERVAL_MS, SCAN_LINES } from "@/constants/scan-lines";
 import { RequestError } from "@/http/functions/post-riot-id";
 import { requestRival } from "@/http/functions/request-rival";
-import { requestRoast } from "@/http/functions/request-roast";
+import {
+  requestRoast,
+  requestSharedRoast,
+} from "@/http/functions/request-roast";
 import { useRoastFlowStore } from "@/store/roast-flow-store";
 import { downloadRoastCard } from "@/utils/download-roast-card";
 
@@ -31,10 +34,20 @@ export function useRoastFlowState() {
   });
 
   const rivalMutation = useMutation({
-    mutationFn: (riotId: string) => requestRival(riotId),
+    mutationFn: (riotId: string) => requestRival(riotId, roast?.id ?? ""),
     onSuccess: store.setRival,
     onError: (error) => toast.error(errorMessage(error)),
   });
+
+  // Open a shared roast (`?r=<id>`) on first load.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: run once on mount
+  useEffect(() => {
+    const id = new URLSearchParams(location.search).get("r");
+    if (!id) return;
+    requestSharedRoast(id).then(showResult, (error) =>
+      toast.error(errorMessage(error)),
+    );
+  }, []);
 
   const scanning = roastMutation.isPending;
 

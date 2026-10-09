@@ -6,14 +6,22 @@ import type { ApiErrorCode } from "@/types/roast";
 
 export class RequestError extends Error {}
 
-export async function postRiotId<T>(url: string, riotId: string) {
+export async function postRiotId<T>(
+  url: string,
+  riotId: string,
+  extra?: Record<string, string>,
+) {
+  return requestJson<T>(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ riotId, ...extra }),
+  });
+}
+
+export async function requestJson<T>(url: string, init?: RequestInit) {
   let response: Response;
   try {
-    response = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ riotId }),
-    });
+    response = await fetch(url, init);
   } catch {
     throw new RequestError(NETWORK_ERROR_MESSAGE);
   }

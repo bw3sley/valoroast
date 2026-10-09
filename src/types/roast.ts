@@ -27,12 +27,15 @@ export interface PlayerStats {
   hs: number;
   wr: number;
   acs: number;
+  kd: number;
   agent: string;
   form: MatchResult[];
 }
 
 export interface Roast extends PlayerStats {
   id: string;
+  /** Riot ID, `Name#TAG`. */
+  name: string;
   badge: RoastBadge;
   verdict: string;
   roast: string;
@@ -57,4 +60,16 @@ export interface CompareRow {
   rival: string | number;
   youPct: number;
   rivalPct: number;
+}
+
+export interface CompareOutcome {
+  winner: string;
+  taunt: string;
+}
+
+/** Shape returned by `POST /api/rival`: the server does the comparison. */
+export interface RivalComparison {
+  rival: Rival;
+  rows: CompareRow[];
+  outcome: CompareOutcome;
 }

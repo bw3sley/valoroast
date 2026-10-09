@@ -11,7 +11,7 @@ export function RoastResult({ roast }: { roast: Roast }) {
       <div className="mb-3.5 flex flex-wrap items-baseline gap-3.5">
         <Eyebrow>Case file</Eyebrow>
         <span className="font-display text-xl uppercase tracking-wide">
-          {roast.id}
+          {roast.name}
         </span>
         <Eyebrow className="ml-auto">{roast.caseNo}</Eyebrow>
       </div>

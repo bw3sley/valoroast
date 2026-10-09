@@ -2,7 +2,7 @@ import "server-only";
 
 import type { z } from "zod";
 
-import { HENRIK_BASE_URL, HENRIK_REVALIDATE_SECONDS } from "@/constants/henrik";
+import { HENRIK_BASE_URL } from "@/constants/henrik";
 import { PlayerNotFoundError } from "@/http/errors/player-not-found-error";
 import { RateLimitedError } from "@/http/errors/rate-limited-error";
 import { UpstreamError } from "@/http/errors/upstream-error";
@@ -22,7 +22,8 @@ export async function henrikFetch<T extends z.ZodType>(
 
   const response = await fetch(url, {
     headers: { Authorization: key },
-    next: { revalidate: HENRIK_REVALIDATE_SECONDS },
+    // Match payloads exceed Next's 2MB data cache limit; the roast dedupe in Neon is the cache.
+    cache: "no-store",
   });
 
   if (response.status === 404) throw new PlayerNotFoundError();

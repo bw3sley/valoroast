@@ -62,7 +62,7 @@ export async function downloadRoastCard(roast: Roast) {
 
   ctx.fillStyle = foreground;
   ctx.font = `60px ${display}`;
-  ctx.fillText(roast.id.toUpperCase(), 72, 240);
+  ctx.fillText(roast.name.toUpperCase(), 72, 240);
   ctx.font = `52px ${display}`;
   wrapText(ctx, roast.roast, 72, 380, 930, 64);
 

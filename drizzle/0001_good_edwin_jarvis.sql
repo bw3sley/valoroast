@@ -1,0 +1,1 @@
+ALTER TABLE "roasts" ADD COLUMN "kd" real;

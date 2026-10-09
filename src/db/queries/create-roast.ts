@@ -1,12 +1,28 @@
 import "server-only";
 
 import { nanoid } from "nanoid";
+import { hash } from "ohash";
 import { digest } from "ohash/crypto";
 
 import { DELETE_TOKEN_LENGTH } from "@/constants/roast-storage";
 import { db } from "@/db/client";
 import { roasts } from "@/db/schema/roasts";
-import { buildDedupeKey } from "@/utils/build-dedupe-key";
+
+/** Same key for the same Riot ID (case-insensitive) and intensity, so repeats reuse the stored roast. */
+export function buildDedupeKey({
+  riot_game_name,
+  riot_tag_line,
+  roast_intensity,
+}: {
+  riot_game_name: string;
+  riot_tag_line: string;
+  roast_intensity?: string | null;
+}) {
+  return hash({
+    riot_id: `${riot_game_name}#${riot_tag_line}`.trim().toLowerCase(),
+    roast_intensity: roast_intensity ?? null,
+  });
+}
 
 type RoastSnapshot = Omit<
   typeof roasts.$inferInsert,

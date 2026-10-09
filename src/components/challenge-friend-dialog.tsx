@@ -18,7 +18,6 @@ import { Eyebrow } from "@/components/ui/eyebrow";
 import { InputControl, InputError, InputRoot } from "@/components/ui/input";
 import { useRoastFlow } from "@/contexts/roast-flow-context";
 import { riotIdSchema } from "@/http/schemas/riot-id";
-import { buildCompareOutcome, buildCompareRows } from "@/utils/compare";
 
 const challengeSchema = z.object({ rivalId: riotIdSchema });
 
@@ -50,7 +49,6 @@ export function ChallengeFriendDialog() {
   }
 
   const error = errors.rivalId?.message;
-  const outcome = roast && rival ? buildCompareOutcome(roast, rival) : null;
 
   return (
     <Dialog open={compareOpen} onOpenChange={setCompareOpen}>
@@ -90,23 +88,25 @@ export function ChallengeFriendDialog() {
           {error && <InputError className="w-full">{error}</InputError>}
         </form>
 
-        {roast && rival && outcome && (
+        {roast && rival && (
           <div className="mt-5 animate-in">
             <div className="flex justify-between font-condensed text-sm uppercase tracking-wider text-muted-foreground">
-              <span>{roast.id.toUpperCase()}</span>
-              <span className="text-success">{rival.name.toUpperCase()}</span>
+              <span>{roast.name.toUpperCase()}</span>
+              <span className="text-success">
+                {rival.rival.name.toUpperCase()}
+              </span>
             </div>
             <div className="mt-3 flex flex-col gap-3">
-              {buildCompareRows(roast, rival).map((row) => (
+              {rival.rows.map((row) => (
                 <CompareRow key={row.label} row={row} />
               ))}
             </div>
             <Card variant="success" size="sm" className="mt-4">
               <div className="font-display text-xl uppercase text-success">
-                {outcome.winner.toUpperCase()} wins
+                {rival.outcome.winner.toUpperCase()} wins
               </div>
               <div className="mt-1 text-sm leading-normal text-muted-foreground">
-                {outcome.taunt}
+                {rival.outcome.taunt}
               </div>
             </Card>
             <div className="mt-4 flex flex-wrap gap-2">

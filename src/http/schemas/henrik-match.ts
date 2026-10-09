@@ -8,6 +8,8 @@ export const henrikMatchSchema = z.object({
       agent: z.object({ name: z.string() }),
       stats: z.object({
         score: z.number(),
+        kills: z.number(),
+        deaths: z.number(),
         headshots: z.number(),
         bodyshots: z.number(),
         legshots: z.number(),

@@ -1,14 +1,14 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
-import type { Rival, Roast } from "@/types/roast";
+import type { RivalComparison, Roast } from "@/types/roast";
 
 export type RoastView = "idle" | "scanning" | "result";
 
 interface RoastFlowState {
   view: RoastView;
   roast: Roast | null;
-  rival: Rival | null;
+  rival: RivalComparison | null;
   scanIndex: number;
   compareOpen: boolean;
   deleteOpen: boolean;
@@ -19,7 +19,7 @@ interface RoastFlowActions {
   tickScan: () => void;
   showResult: (roast: Roast) => void;
   failScan: () => void;
-  setRival: (rival: Rival | null) => void;
+  setRival: (rival: RivalComparison | null) => void;
   setCompareOpen: (open: boolean) => void;
   setDeleteOpen: (open: boolean) => void;
   reset: () => void;
