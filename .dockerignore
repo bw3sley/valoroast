@@ -27,3 +27,7 @@ src/components/ui/AGENTS.md
 .neon
 .mcp.json
 skills-lock.json
+neon.ts
+biome.json
+drizzle
+drizzle.config.ts
