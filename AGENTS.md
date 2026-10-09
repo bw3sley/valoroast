@@ -12,7 +12,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## Project Context
 
-Valoroast is being migrated from a plain-HTML prototype (`valoroast/index.html`, mocked data) to this Next.js app. The HTML prototype is the visual and behavioral reference: sizing, surfaces, spacing, colors, copy and interaction states come from it unless `DESIGN.md` says otherwise.
+Valoroast was migrated from a plain-HTML prototype (`valoroast/index.html`, mocked data) to this Next.js app. The prototype is no longer in the repo; `DESIGN.md` and the existing components are now the visual and behavioral reference. Mentions of the prototype below are historical.
 
 ## Package Manager
 
@@ -25,6 +25,7 @@ npm run build         # production build (includes type-check)
 npm run start         # serve the production build
 npm run lint          # lint + format check via Biome
 npm run format        # format via Biome
+npm run lint:fix      # apply Biome fixes (check --write --unsafe)
 npm run db:generate   # generate a SQL migration from src/db/schema
 npm run db:migrate    # apply migrations to DATABASE_URL (Neon)
 npm run db:studio     # Drizzle Studio
@@ -41,7 +42,7 @@ npm run db:studio     # Drizzle Studio
 - **AI** - Vercel `ai` SDK + `@ai-sdk/openai` (server-only, `src/http/functions/generate-roast.ts`)
 - **Data fetching** - `@tanstack/react-query` mutations calling our own `/api/*` route handlers
 - **State** - Zustand + Immer stores in `src/store/`
-- **Database** - Neon Postgres via Drizzle ORM (`pg` driver), Zod validators from `drizzle-zod`; tables are plural and every column is snake_case in SQL and in the TS schema
+- **Database** - Neon Postgres via Drizzle ORM (Neon serverless HTTP driver, `drizzle-orm/neon-http`), Zod validators from `drizzle-zod`; tables are plural and every column is snake_case in SQL and in the TS schema
 - **Player data** - HenrikDev unofficial Valorant API, called server-side only
 - **Notifications** - Sonner
 - **Linting / formatting** - Biome
@@ -55,8 +56,10 @@ src/
   app/
     layout.tsx        # root layout, fonts, metadata, QueryProvider, Toaster
     api/
-      roast/route.ts  # POST { riotId } -> real stats + OpenAI roast
-      rival/route.ts  # POST { riotId } -> rival stats only
+      AGENTS.md       # route handler rules
+      roast/route.ts  # POST { riotId } -> real stats + OpenAI roast (deduped, persisted)
+      roast/[id]/route.ts # GET stored roast by uuid (share link `?r=<id>`)
+      rival/route.ts  # POST { riotId, roastId } -> rival stats, comparison, persisted challenge
     globals.css       # global styles and theme tokens
     (roasts)/         # pathless route group for the app, serves `/`
       layout.tsx      # header, footer, dialogs, RoastFlowProvider
@@ -68,22 +71,26 @@ src/
   contexts/           # providers + consumer hooks (query-provider, roast-flow-context)
   hooks/              # reusable hooks (use-roast-flow-state)
   db/
-    client.ts         # server-only pg Pool + drizzle instance
+    AGENTS.md         # database rules
+    client.ts         # server-only neon-http drizzle instance
     schema/           # one file per table (roasts, roast-challenges)
     validators/       # drizzle-zod insert/select schemas
-    queries/          # one query helper per file (create-roast, find-roast-by-id, ...)
-  constants/          # static values: badges, verdicts, scan lines, Henrik/OpenAI config, error messages
+    queries/          # one query helper per file (create-roast, create-challenge, find-roast-by-id, find-recent-roast-by-dedupe-key)
+  constants/          # static values: badges, verdicts, scan lines, Henrik/OpenAI config, roast storage, error messages (see constants/AGENTS.md)
   http/
+    AGENTS.md         # HTTP layer rules
+    error-response.ts # server-only errorResponse() used by every route handler
     errors/           # one server-only error class per file (app-error, player-not-found-error, ...)
-    functions/        # every function that makes an HTTP/API call (Henrik + OpenAI server-only, request-* client)
+    functions/        # Henrik/OpenAI calls and DB-row mapping (server-only), pure logic (build-compare, calculate-player-stats), browser fetch helpers (post-riot-id, request-roast, request-rival)
     schemas/          # zod schemas for requests and external API responses
   lib/
     utils.ts          # `cn()` - the only file allowed in lib/
-  store/              # zustand + immer stores (roast-flow-store)
+  store/              # zustand + immer stores (roast-flow-store); see store/AGENTS.md
   types/              # shared TypeScript types (roast)
-  utils/              # pure helpers (compare, player stats calculation, case number, error-response, canvas card download)
+  utils/              # pure helpers (currently only the canvas card download)
 drizzle/               # generated SQL migrations (commit them)
 drizzle.config.ts     # drizzle-kit config, reads DATABASE_URL from `.env.local`
+neon.ts               # Neon project config
 .env.example          # required env vars; copy to `.env.local`
 README.md             # project overview
 DESIGN.md             # product and design system guidance
@@ -94,7 +101,7 @@ CLAUDE.md             # points agents back to this file
 
 Copy `.env.example` to `.env.local` and fill in `OPENAI_API_KEY`, `OPENAI_MODEL` (optional) and
 `DATABASE_URL` (Neon connection string with `?sslmode=require`), `HENRIKDEV_API_KEY` (free Basic key, 30 req/min, from https://api.henrikdev.xyz/dashboard/). Keys
-are read only on the server; server API functions in `http/functions/` and every file in `http/errors/` import `server-only`.
+are read only on the server. `server-only` is imported by `db/client.ts`, every file in `db/queries/` and `http/errors/`, `http/error-response.ts`, and the Henrik/OpenAI/DB-mapping files in `http/functions/` (`get-player-stats`, `get-henrik-*`, `henrik-fetch`, `generate-roast`, `to-roast-response`). The browser helpers (`post-riot-id`, `request-*`) and pure logic must not import it or any server-only module.
 
 ## Path Aliases
 
@@ -104,7 +111,9 @@ are read only on the server; server API functions in `http/functions/` and every
 
 For UI, layout, styling, and visual refinement work, read and follow `@DESIGN.md` before making changes.
 
-## Migrating the HTML Prototype
+## Migrating the HTML Prototype (historical)
+
+The prototype file is gone; these rules still describe how UI patterns were translated.
 
 - Translate repeated patterns from `valoroast/index.html` into `src/components/ui/` primitives; translate one-off markup into page-local JSX that composes those primitives.
 - Create a shared `/ui` component only when the pattern is generic (no Valoroast business meaning) **and** the live UI renders it. Do not add primitives speculatively.
@@ -122,7 +131,7 @@ For UI, layout, styling, and visual refinement work, read and follow `@DESIGN.md
 
 ## Key Conventions
 
-- `src/lib/` holds only `utils.ts`; new code goes in `constants/`, `http/`, `store/`, `types/` or `utils/`.
+- `src/lib/` holds only `utils.ts`; new code goes in `constants/`, `db/`, `http/`, `store/`, `types/`, `hooks/`, `contexts/` or `utils/`.
 - Reusable UI belongs in `src/components/ui/`.
 - Component rules for `src/components/ui/` live in `src/components/AGENTS.md` and must be followed.
 - Use `cn()` from `src/lib/utils.ts` for class merging.
@@ -133,11 +142,24 @@ For UI, layout, styling, and visual refinement work, read and follow `@DESIGN.md
   components, hooks, and standalone utilities. Inline one-off callbacks
   (e.g. `array.map((x) => ...)`, `onClick={() => ...}`) are unaffected — this rule targets named
   function definitions, not throwaway callback expressions.
+- Exception: action members inside a zustand `immer((set) => ({...}))` object may be arrow functions (see `src/store/AGENTS.md`).
 - Biome is the linter and formatter. Do not add ESLint, oxlint or Prettier config.
+
+## Folder Rules
+
+Each of these has its own AGENTS.md that must be followed when working there:
+
+- `src/components/AGENTS.md` - UI primitives
+- `src/app/api/AGENTS.md` - route handlers
+- `src/http/AGENTS.md` - errors, schemas, Henrik/OpenAI functions, client request helpers
+- `src/db/AGENTS.md` - schema, validators, queries, migrations
+- `src/constants/AGENTS.md` - static values
+- `src/store/AGENTS.md` - zustand stores
 
 ## Documentation Rules
 
 - Keep `DESIGN.md` updated when product visual language, layout rules, or token strategy changes.
 - Keep this file updated when stack, scripts, or folder structure changes.
+- Keep the folder-level AGENTS.md files updated when their folder's rules or files change.
 - Keep `CLAUDE.md` as a pointer file only.
 - Keep the `nextjs-agent-rules` block at the top of this file; `next dev` re-adds it if removed.

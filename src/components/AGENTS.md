@@ -265,7 +265,7 @@ Always include these two variant axes at minimum. Pick names from the tables bel
 
 ### `size` — spatial scale
 
-Sizes come from the HTML prototype (`valoroast/index.html`), not from a generic scale. Keep the names:
+Sizes come from the original HTML prototype (no longer in the repo; the existing components are the reference), not from a generic scale. Keep the names:
 
 | Name | Use |
 |---|---|
@@ -316,7 +316,7 @@ every element.
 ## Testing
 
 **Primitives in this folder do not need unit tests.** Verify them by rendering every variant and
-size on a temporary catalog route (or the first migrated screen) against `valoroast/index.html`,
+size on a temporary catalog route (or the first migrated screen) against the existing screens,
 plus `npm run lint` and `npm run build`. Delete the temporary route before committing.
 
 When tests are added for feature components or logic, use **Vitest** + **Testing Library** and

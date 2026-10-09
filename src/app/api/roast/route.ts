@@ -1,8 +1,13 @@
 import { BADGES } from "@/constants/badges";
+import { RATE_LIMITS } from "@/constants/rate-limits";
 import { buildDedupeKey, createRoast } from "@/db/queries/create-roast";
 import { findRecentRoastByDedupeKey } from "@/db/queries/find-recent-roast-by-dedupe-key";
 import { errorResponse } from "@/http/error-response";
 import { InvalidRequestError } from "@/http/errors/invalid-request-error";
+import {
+  enforceRateLimit,
+  getClientIp,
+} from "@/http/functions/enforce-rate-limit";
 import { generateRoast } from "@/http/functions/generate-roast";
 import { getPlayerStats } from "@/http/functions/get-player-stats";
 import { toRoastResponse } from "@/http/functions/to-roast-response";
@@ -27,6 +32,12 @@ export async function POST(request: Request) {
     if (cached) {
       return Response.json(toRoastResponse(cached));
     }
+
+    await enforceRateLimit(
+      `roast:${getClientIp(request)}`,
+      RATE_LIMITS.roastPerIp,
+    );
+    await enforceRateLimit("henrik", RATE_LIMITS.henrikGlobal);
 
     const { stats, account } = await getPlayerStats(name, tag);
     const output = await generateRoast(`${account.name}#${account.tag}`, stats);

@@ -1,8 +1,13 @@
+import { RATE_LIMITS } from "@/constants/rate-limits";
 import { createChallenge } from "@/db/queries/create-challenge";
 import { findRoastById } from "@/db/queries/find-roast-by-id";
 import { errorResponse } from "@/http/error-response";
 import { InvalidRequestError } from "@/http/errors/invalid-request-error";
 import { buildCompare } from "@/http/functions/build-compare";
+import {
+  enforceRateLimit,
+  getClientIp,
+} from "@/http/functions/enforce-rate-limit";
 import { getPlayerStats } from "@/http/functions/get-player-stats";
 import { rivalRequestSchema } from "@/http/schemas/riot-id";
 
@@ -23,6 +28,12 @@ export async function POST(request: Request) {
     if (!roast) {
       throw new InvalidRequestError("Roast not found");
     }
+
+    await enforceRateLimit(
+      `rival:${getClientIp(request)}`,
+      RATE_LIMITS.rivalPerIp,
+    );
+    await enforceRateLimit("henrik", RATE_LIMITS.henrikGlobal);
 
     const { stats, account } = await getPlayerStats(name, tag);
 
