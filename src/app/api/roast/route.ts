@@ -18,6 +18,7 @@ export async function POST(request: Request) {
     const body = riotIdRequestSchema.safeParse(
       await request.json().catch(() => null),
     );
+
     if (!body.success) {
       throw new InvalidRequestError("Use Username#TAG");
     }
@@ -37,6 +38,7 @@ export async function POST(request: Request) {
       `roast:${getClientIp(request)}`,
       RATE_LIMITS.roastPerIp,
     );
+
     await enforceRateLimit("henrik", RATE_LIMITS.henrikGlobal);
 
     const { stats, account } = await getPlayerStats(name, tag);

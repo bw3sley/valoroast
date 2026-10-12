@@ -175,6 +175,14 @@ Form schemas live inside the form components. Shared flow state (view, roast, ri
 - **Tablet (768px–1024px):** stat grid at 3 columns, verdict stamp scales down with `clamp()`.
 - **Desktop (> 1024px):** full 5-tile stat row, max-width container, larger display type.
 
+## Share Images
+Open Graph / X cards are 1200x630 PNGs rendered with `takumi-js` from `src/components/og/` (default card at `/opengraph-image`, per-roast card at `/api/og/[id]`).
+- Same dark canvas and red/teal corner glows as the app; red for the verdict and logo accent, off-white for text. No other colors.
+- Logo small at the top-left, footer label bottom-left, one dominant headline (the verdict or "Get roasted."), at most three stat tiles with a red left accent border.
+- Anton for the headline and numbers, Barlow Condensed Bold (uppercase, tracked) for labels. Font files live in `assets/fonts/`.
+- The renderer cannot read CSS variables or Tailwind tokens, so the hex values are repeated in `src/constants/og.ts`. This is the only place hex values are allowed; keep them in sync with `globals.css`.
+- Keep copy short enough to read at thumbnail size.
+
 ## Iteration Guide
 1. Start from the HTML prototype and the semantic tokens in `src/app/globals.css`.
 2. Reuse existing primitives before creating new visual patterns.

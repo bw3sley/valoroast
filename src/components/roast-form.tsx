@@ -20,7 +20,7 @@ const roastFormSchema = z.object({ riotId: riotIdSchema });
 type RoastFormValues = z.infer<typeof roastFormSchema>;
 
 export function RoastForm() {
-  const { scan, view } = useRoastFlow();
+  const { scan, view, clearError } = useRoastFlow();
   const {
     register,
     handleSubmit,
@@ -35,7 +35,7 @@ export function RoastForm() {
     <form
       className="mt-8"
       noValidate
-      onSubmit={handleSubmit(({ riotId }) => scan(riotId))}
+      onSubmit={handleSubmit(({ riotId }) => scan(riotId), clearError)}
     >
       <div className="flex flex-wrap justify-center gap-2.5">
         <InputRoot className="sm:max-w-sm" size="lg">
@@ -49,6 +49,7 @@ export function RoastForm() {
             {...register("riotId")}
           />
         </InputRoot>
+
         <Button
           data-testid="roast-submit-button"
           disabled={view === "scanning"}
@@ -58,6 +59,7 @@ export function RoastForm() {
           Roast me
         </Button>
       </div>
+
       <div className="mt-3 min-h-5 text-center">
         {error ? (
           <InputError>{error}</InputError>

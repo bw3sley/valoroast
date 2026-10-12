@@ -9,6 +9,7 @@ interface RoastFlowState {
   view: RoastView;
   roast: Roast | null;
   rival: RivalComparison | null;
+  error: string | null;
   scanIndex: number;
   compareOpen: boolean;
   deleteOpen: boolean;
@@ -18,7 +19,8 @@ interface RoastFlowActions {
   startScan: () => void;
   tickScan: () => void;
   showResult: (roast: Roast) => void;
-  failScan: () => void;
+  failScan: (message: string) => void;
+  clearError: () => void;
   setRival: (rival: RivalComparison | null) => void;
   setCompareOpen: (open: boolean) => void;
   setDeleteOpen: (open: boolean) => void;
@@ -29,6 +31,7 @@ const initialState: RoastFlowState = {
   view: "idle",
   roast: null,
   rival: null,
+  error: null,
   scanIndex: 0,
   compareOpen: false,
   deleteOpen: false,
@@ -40,6 +43,7 @@ export const useRoastFlowStore = create<RoastFlowState & RoastFlowActions>()(
     startScan: () =>
       set((state) => {
         state.view = "scanning";
+        state.error = null;
         state.scanIndex = 0;
       }),
     tickScan: () =>
@@ -50,11 +54,19 @@ export const useRoastFlowStore = create<RoastFlowState & RoastFlowActions>()(
       set((state) => {
         state.roast = roast;
         state.rival = null;
+        state.error = null;
         state.view = "result";
       }),
-    failScan: () =>
+    failScan: (message) =>
       set((state) => {
-        state.view = state.roast ? "result" : "idle";
+        state.view = "idle";
+        state.roast = null;
+        state.rival = null;
+        state.error = message;
+      }),
+    clearError: () =>
+      set((state) => {
+        state.error = null;
       }),
     setRival: (rival) =>
       set((state) => {
