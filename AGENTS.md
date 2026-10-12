@@ -44,6 +44,7 @@ npm run db:studio     # Drizzle Studio
 - **State** - Zustand + Immer stores in `src/store/`
 - **Database** - Neon Postgres via Drizzle ORM (Neon serverless HTTP driver, `drizzle-orm/neon-http`), Zod validators from `drizzle-zod`; tables are plural and every column is snake_case in SQL and in the TS schema
 - **Player data** - HenrikDev unofficial Valorant API, called server-side only
+- **Share images** - `takumi-js/response` (`ImageResponse`, native binding; `serverExternalPackages` + font tracing set in `next.config.ts`)
 - **Notifications** - Sonner
 - **Linting / formatting** - Biome
 - **Language** - TypeScript 5
@@ -59,15 +60,20 @@ src/
       AGENTS.md       # route handler rules
       roast/route.ts  # POST { riotId } -> real stats + OpenAI roast (deduped, persisted)
       roast/[id]/route.ts # GET stored roast by uuid (share link `?r=<id>`)
+      og/[id]/route.tsx   # GET 1200x630 PNG share image for a roast (takumi-js), falls back to the default card
       rival/route.ts  # POST { riotId, roastId } -> rival stats, comparison, persisted challenge
     globals.css       # global styles and theme tokens
+    opengraph-image.tsx, twitter-image.tsx # default 1200x630 share cards (takumi-js)
+    icon.tsx, apple-icon.tsx               # generated app icons (favicon.ico stays static)
+    manifest.ts, robots.ts, sitemap.ts     # web manifest, robots.txt, sitemap.xml
     (roasts)/         # pathless route group for the app, serves `/`
       layout.tsx      # header, footer, dialogs, RoastFlowProvider
-      page.tsx        # home screen (hero, scan, result)
+      page.tsx        # server page: `generateMetadata` for `?r=<id>` (title, OG/X tags, noindex) + <HomeScreen />
   components/
     AGENTS.md         # source of truth for UI component rules
     ui/               # reusable UI primitives
-    *.tsx             # Valoroast feature components (header, roast-form, verdict-card, dialogs...)
+    *.tsx             # Valoroast feature components (header, roast-form, verdict-card, home-screen, dialogs...)
+    og/               # share-image cards rendered by takumi-js (server-only, inline styles with hex from constants/og.ts)
   contexts/           # providers + consumer hooks (query-provider, roast-flow-context)
   hooks/              # reusable hooks (use-roast-flow-state)
   db/
@@ -87,7 +93,8 @@ src/
     utils.ts          # `cn()` - the only file allowed in lib/
   store/              # zustand + immer stores (roast-flow-store); see store/AGENTS.md
   types/              # shared TypeScript types (roast)
-  utils/              # pure helpers (currently only the canvas card download)
+  utils/              # helpers: canvas card download, `getSiteUrl`, share-image/icon response builders and font loader (server-only)
+assets/               # README cover and share-image fonts (`assets/fonts/`: Anton + Barlow Condensed Bold, OFL, read at runtime)
 drizzle/               # generated SQL migrations (commit them)
 drizzle.config.ts     # drizzle-kit config, reads DATABASE_URL from `.env.local`
 neon.ts               # Neon project config
@@ -101,7 +108,7 @@ CLAUDE.md             # points agents back to this file
 
 Copy `.env.example` to `.env.local` and fill in `OPENAI_API_KEY`, `OPENAI_MODEL` (optional) and
 `DATABASE_URL` (Neon connection string with `?sslmode=require`), `HENRIKDEV_API_KEY` (free Basic key, 30 req/min, from https://api.henrikdev.xyz/dashboard/). Keys
-are read only on the server. `server-only` is imported by `db/client.ts`, every file in `db/queries/` and `http/errors/`, `http/error-response.ts`, and the Henrik/OpenAI/DB-mapping files in `http/functions/` (`get-player-stats`, `get-henrik-*`, `henrik-fetch`, `generate-roast`, `to-roast-response`). The browser helpers (`post-riot-id`, `request-*`) and pure logic must not import it or any server-only module.
+are read only on the server. `NEXT_PUBLIC_SITE_URL` (optional, defaults to `https://valoroast.com`) feeds `metadataBase`, canonical URLs, `robots.txt` and `sitemap.xml`; it is inlined at build time, so the Dockerfile takes it as a build arg. `server-only` is imported by `db/client.ts`, every file in `db/queries/` and `http/errors/`, `http/error-response.ts`, and the Henrik/OpenAI/DB-mapping files in `http/functions/` (`get-player-stats`, `get-henrik-*`, `henrik-fetch`, `generate-roast`, `to-roast-response`). The browser helpers (`post-riot-id`, `request-*`) and pure logic must not import it or any server-only module.
 
 ## Path Aliases
 

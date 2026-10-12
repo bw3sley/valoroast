@@ -9,6 +9,7 @@ Route handlers are thin orchestrators. Business logic lives in `src/http/functio
 | `POST /api/roast` (`roast/route.ts`) | `{ riotId }` -> roast. Checks the dedupe cache first, otherwise Henrik stats -> OpenAI -> persist. |
 | `GET /api/roast/[id]` (`roast/[id]/route.ts`) | Stored roast by uuid. Backs the `?r=<id>` share link. |
 | `POST /api/rival` (`rival/route.ts`) | `{ riotId, roastId }` -> `RivalComparison`, persists a `roast_challenges` row. |
+| `GET /api/og/[id]` (`og/[id]/route.tsx`) | 1200x630 PNG share image for a stored roast (`takumi-js`). Used as `og:image` by the `?r=<id>` page. Unknown id or render failure returns the default card instead of an error, so it is the one route that does not use `errorResponse`. Immutable cache for hits. |
 
 ## Flows
 

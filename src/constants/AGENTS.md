@@ -10,8 +10,10 @@ Static values only: config numbers, copy, prompt text and key lists. Flat folder
 | `badges.ts` | `BADGE_KEYS` (`as const`), `BADGES` (name, Lucide icon, description per key) |
 | `henrik.ts` | `HENRIK_BASE_URL`, `MATCH_COUNT`, `FORM_LENGTH`, `HENRIK_AFFINITY_OVERRIDES` |
 | `openai.ts` | `DEFAULT_OPENAI_MODEL`, `ROAST_MAX_OUTPUT_TOKENS`, `ROAST_SYSTEM_PROMPT` |
+| `og.ts` | Share-image size, content type, cache header, font names and `OG_COLORS` (hex copies of the theme tokens; the image renderer cannot read CSS variables) |
 | `roast-storage.ts` | `DEDUPE_WINDOW_DAYS`, `DELETE_TOKEN_LENGTH` |
 | `scan-lines.ts` | `SCAN_LINES`, `SCAN_LINE_INTERVAL_MS` |
+| `site.ts` | `SITE_NAME`, `SITE_TITLE`, `SITE_DESCRIPTION`, `SITE_THEME_COLOR`, `SITE_DEFAULT_URL` (metadata, manifest) |
 | `verdicts.ts` | `VERDICTS` (`as const`) |
 
 ## Rules
