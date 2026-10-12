@@ -27,10 +27,7 @@ export function useRoastFlowState() {
   const roastMutation = useMutation({
     mutationFn: (riotId: string) => requestRoast(riotId),
     onSuccess: showResult,
-    onError: (error) => {
-      failScan();
-      toast.error(errorMessage(error));
-    },
+    onError: (error) => failScan(errorMessage(error)),
   });
 
   const rivalMutation = useMutation({
@@ -100,6 +97,7 @@ export function useRoastFlowState() {
     view: store.view,
     roast,
     rival: store.rival,
+    error: store.error,
     rivalPending: rivalMutation.isPending,
     scanLine: SCAN_LINES[scanIndex % SCAN_LINES.length],
     compareOpen: store.compareOpen,
@@ -107,6 +105,7 @@ export function useRoastFlowState() {
     setCompareOpen: store.setCompareOpen,
     setDeleteOpen: store.setDeleteOpen,
     scan,
+    clearError: store.clearError,
     challenge,
     remove,
     copyLink,

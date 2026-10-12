@@ -4,7 +4,7 @@ Zustand + Immer. Currently one store, `roast-flow-store.ts`, exporting `RoastVie
 
 ## Scope
 
-- Stores hold UI flow state only: `view`, `roast`, `rival`, `scanIndex`, `compareOpen`, `deleteOpen`.
+- Stores hold UI flow state only: `view`, `roast`, `rival`, `error`, `scanIndex`, `compareOpen`, `deleteOpen`.
 - Server data fetching and async work stay in React Query mutations (see `src/hooks/use-roast-flow-state.ts`). Do not call `/api/*` from a store.
 - Stores are client-only. Do not import them from server code.
 
@@ -14,7 +14,7 @@ Zustand + Immer. Currently one store, `roast-flow-store.ts`, exporting `RoastVie
 - Separate non-exported `State` and `Actions` interfaces. A module-level `initialState`; `reset` is `set(() => ({ ...initialState }))` (returns a fresh object rather than mutating the draft).
 - Actions are small, named by intent (`startScan`, `tickScan`, `showResult`, `failScan`, `setRival`, ...) and mutate the draft: `set((state) => { state.x = ... })`.
 - Arrow-function action members are allowed here; the "function declarations" rule applies to named definitions, not members of the store object.
-- Put derived transitions inside the action (for example `failScan` returns to `result` if a roast exists, otherwise `idle`; `showResult` clears `rival`).
+- Put derived transitions inside the action (for example `failScan(message)` returns to `idle`, clears `roast` and `rival`, and stores the message in `error` so a failed lookup never leaves the previous roast on screen; `startScan` and `showResult` clear `error`; `showResult` clears `rival`).
 - Types come from `@/types/roast`.
 
 ## Consumption
