@@ -23,7 +23,9 @@ export function DeleteRoastDialog() {
       <AlertDialogContent>
         <AlertDialogHeader>
           <Eyebrow variant="primary">Delete roast</Eyebrow>
+
           <AlertDialogTitle>This cannot be undone</AlertDialogTitle>
+
           <AlertDialogDescription>
             Deleting removes your roast, the stats we fetched and your share
             link from our servers. Anyone who already opened the link will see

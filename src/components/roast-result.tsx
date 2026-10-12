@@ -10,12 +10,16 @@ export function RoastResult({ roast }: { roast: Roast }) {
     <section className="mb-13 animate-in">
       <div className="mb-3.5 flex flex-wrap items-baseline gap-3.5">
         <Eyebrow>Case file</Eyebrow>
+
         <span className="font-display text-xl uppercase tracking-wide">
           {roast.name}
         </span>
+
         <Eyebrow className="ml-auto">{roast.caseNo}</Eyebrow>
       </div>
+
       <VerdictCard roast={roast} />
+
       <div className="mt-6 grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-5">
         <StatTile label="Headshot %" value={`${roast.hs}%`} />
         <StatTile label="Winrate" value={`${roast.wr}%`} />

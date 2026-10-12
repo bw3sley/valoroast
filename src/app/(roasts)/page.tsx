@@ -9,12 +9,13 @@ export async function generateMetadata({
   searchParams,
 }: PageProps<"/">): Promise<Metadata> {
   const id = z.uuid().safeParse((await searchParams).r);
+
   if (!id.success) {
     return {};
   }
 
-  // A DB failure must not break the page; fall back to the default tags.
   const roast = await findRoastById(id.data).catch(() => null);
+
   if (!roast) {
     return {};
   }

@@ -25,6 +25,7 @@ export async function GET(
     }
 
     const roast = toRoastResponse(row);
+
     const image = new ImageResponse(
       <RoastOgCard
         name={roast.name}
@@ -42,6 +43,7 @@ export async function GET(
         headers: { "Cache-Control": OG_CACHE_CONTROL },
       },
     );
+
     await image.ready;
 
     return image;

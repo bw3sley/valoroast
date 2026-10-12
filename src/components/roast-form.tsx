@@ -49,6 +49,7 @@ export function RoastForm() {
             {...register("riotId")}
           />
         </InputRoot>
+
         <Button
           data-testid="roast-submit-button"
           disabled={view === "scanning"}
@@ -58,6 +59,7 @@ export function RoastForm() {
           Roast me
         </Button>
       </div>
+
       <div className="mt-3 min-h-5 text-center">
         {error ? (
           <InputError>{error}</InputError>

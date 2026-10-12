@@ -57,6 +57,7 @@ export function ChallengeFriendDialog() {
           <Eyebrow variant="primary">1v1 case comparison</Eyebrow>
           <DialogTitle>Challenge a rival</DialogTitle>
         </DialogHeader>
+
         <DialogDescription>
           Type any Riot ID. We pull their file and put it next to yours. Fair
           warning: it rarely goes your way.
@@ -96,23 +97,28 @@ export function ChallengeFriendDialog() {
                 {rival.rival.name.toUpperCase()}
               </span>
             </div>
+
             <div className="mt-3 flex flex-col gap-3">
               {rival.rows.map((row) => (
                 <CompareRow key={row.label} row={row} />
               ))}
             </div>
+
             <Card variant="success" size="sm" className="mt-4">
               <div className="font-display text-success text-xl uppercase">
                 {rival.outcome.winner.toUpperCase()} wins
               </div>
+
               <div className="mt-1 text-muted-foreground text-sm leading-normal">
                 {rival.outcome.taunt}
               </div>
             </Card>
+
             <div className="mt-4 flex flex-wrap gap-2">
               <Button variant="inverse" size="sm" onClick={downloadCard}>
                 Download 1v1 card
               </Button>
+
               <Button variant="secondary" size="sm" onClick={copyLink}>
                 Copy link
               </Button>
