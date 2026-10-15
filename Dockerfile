@@ -15,6 +15,10 @@ ENV NEXT_TELEMETRY_DISABLED=1
 ARG NEXT_PUBLIC_SITE_URL=https://valoroast.com
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 
+# PostHog project token; inlined at build time. Empty disables analytics.
+ARG NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN=
+ENV NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN=$NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN
+
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npm run build

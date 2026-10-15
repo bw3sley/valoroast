@@ -11,6 +11,25 @@ const nextConfig: NextConfig = {
     "/opengraph-image": ["./assets/fonts/**/*"],
     "/twitter-image": ["./assets/fonts/**/*"],
   },
+  // PostHog reverse proxy (US cloud). The static/array rules must precede the catch-all.
+  async rewrites() {
+    return [
+      {
+        source: "/ingest/static/:path*",
+        destination: "https://us-assets.i.posthog.com/static/:path*",
+      },
+      {
+        source: "/ingest/array/:path*",
+        destination: "https://us-assets.i.posthog.com/array/:path*",
+      },
+      {
+        source: "/ingest/:path*",
+        destination: "https://us.i.posthog.com/:path*",
+      },
+    ];
+  },
+  // PostHog capture endpoints end in a slash; don't redirect them.
+  skipTrailingSlashRedirect: true,
 };
 
 export default nextConfig;

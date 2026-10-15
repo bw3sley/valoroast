@@ -115,11 +115,19 @@ export function ChallengeFriendDialog() {
             </Card>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              <Button variant="inverse" size="sm" onClick={downloadCard}>
+              <Button
+                variant="inverse"
+                size="sm"
+                onClick={() => downloadCard("compare_dialog")}
+              >
                 Download 1v1 card
               </Button>
 
-              <Button variant="secondary" size="sm" onClick={copyLink}>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={() => copyLink("compare_dialog")}
+              >
                 Copy link
               </Button>
             </div>
