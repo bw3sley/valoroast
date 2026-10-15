@@ -10,7 +10,8 @@ import { RateLimitedError } from "@/http/errors/rate-limited-error";
 const globalForLimiters = globalThis as unknown as {
   limiters?: Map<string, RateLimiterMemory>;
 };
-const limiters = (globalForLimiters.limiters ??= new Map());
+globalForLimiters.limiters ??= new Map();
+const limiters = globalForLimiters.limiters;
 
 function getLimiter({ limit, windowSeconds }: RateLimitRule) {
   const id = `${limit}:${windowSeconds}`;

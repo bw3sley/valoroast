@@ -12,8 +12,10 @@ import {
   InputError,
   InputRoot,
 } from "@/components/ui/input";
+import { ANALYTICS_EVENTS } from "@/constants/analytics-events";
 import { useRoastFlow } from "@/contexts/roast-flow-context";
 import { riotIdSchema } from "@/http/schemas/riot-id";
+import { trackEvent } from "@/utils/track-event";
 
 const roastFormSchema = z.object({ riotId: riotIdSchema });
 
@@ -35,7 +37,13 @@ export function RoastForm() {
     <form
       className="mt-8"
       noValidate
-      onSubmit={handleSubmit(({ riotId }) => scan(riotId), clearError)}
+      onSubmit={handleSubmit(
+        ({ riotId }) => scan(riotId),
+        () => {
+          trackEvent(ANALYTICS_EVENTS.ROAST_FORM_INVALID);
+          clearError();
+        },
+      )}
     >
       <div className="flex flex-wrap justify-center gap-2.5">
         <InputRoot className="sm:max-w-sm" size="lg">

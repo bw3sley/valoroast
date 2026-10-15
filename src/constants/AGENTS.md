@@ -6,6 +6,7 @@ Static values only: config numbers, copy, prompt text and key lists. Flat folder
 
 | File | Holds |
 |---|---|
+| `analytics-events.ts` | `ANALYTICS_EVENTS` (PostHog event names, `as const`), `ANALYTICS_STRIPPED_PARAMS` (URL params removed from tracked URLs) |
 | `api-errors.ts` | `API_ERROR_MESSAGES` (one user-facing message per `ApiErrorCode`), `NETWORK_ERROR_MESSAGE` |
 | `badges.ts` | `BADGE_KEYS` (`as const`), `BADGES` (name, Lucide icon, description per key) |
 | `henrik.ts` | `HENRIK_BASE_URL`, `MATCH_COUNT`, `FORM_LENGTH`, `HENRIK_AFFINITY_OVERRIDES` |

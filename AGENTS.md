@@ -46,6 +46,12 @@ Copy `.env.example` to `.env.local` and fill in `OPENAI_API_KEY`, `OPENAI_MODEL`
 `DATABASE_URL` (Neon connection string with `?sslmode=require`), `HENRIKDEV_API_KEY` (free Basic key, 30 req/min, from https://api.henrikdev.xyz/dashboard/). Keys
 are read only on the server. `NEXT_PUBLIC_SITE_URL` (optional, defaults to `https://valoroast.com`) feeds `metadataBase`, canonical URLs, `robots.txt` and `sitemap.xml`; it is inlined at build time, so the Dockerfile takes it as a build arg. `server-only` is imported by `db/client.ts`, every file in `db/queries/` and `http/errors/`, `http/error-response.ts`, and the Henrik/OpenAI/DB-mapping files in `http/functions/` (`get-player-stats`, `get-henrik-*`, `henrik-fetch`, `generate-roast`, `to-roast-response`). The browser helpers (`post-riot-id`, `request-*`) and pure logic must not import it or any server-only module.
 
+## Analytics (PostHog)
+
+- PostHog (US cloud) is initialized in `src/instrumentation-client.ts` only when `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` is set (inlined at build time, so the Dockerfile takes it as a build arg). Requests go through the `/ingest` reverse proxy defined in `next.config.ts` (`rewrites` + `skipTrailingSlashRedirect`).
+- Autocapture and session replay are off. Never send Riot IDs, rival IDs, `roast.name` or free text to PostHog, and never call `identify` with them. `stripShareParam` (`src/utils/strip-share-param.ts`) removes `?r=` from tracked URLs.
+- Add events through `trackEvent()` (`src/utils/track-event.ts`) with a name from `ANALYTICS_EVENTS` (`src/constants/analytics-events.ts`) and typed properties in `AnalyticsEventProperties` (`src/types/analytics.ts`). Call it from `useRoastFlowState()` handlers; names stay static, variable data goes in properties.
+
 ## Path Aliases
 
 `@/*` maps to `./src/*` (set in `tsconfig.json`).
