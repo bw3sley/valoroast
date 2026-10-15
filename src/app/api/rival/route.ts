@@ -33,6 +33,7 @@ export async function POST(request: Request) {
       `rival:${getClientIp(request)}`,
       RATE_LIMITS.rivalPerIp,
     );
+
     await enforceRateLimit("henrik", RATE_LIMITS.henrikGlobal);
 
     const { stats, account } = await getPlayerStats(name, tag);
