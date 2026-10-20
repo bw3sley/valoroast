@@ -1,57 +1,61 @@
-<p align="center">
-  <img src="./assets/cover.png" alt="Valoroast cover" width="100%" />
-</p>
-
 # Valoroast
 
-Valoroast turns a Valorant player's stats into a joke verdict. Enter a Riot ID, and the app pulls recent match data, then writes a short, exaggerated roast you can send to the friend who keeps dying first on site.
+<a href="https://github.com/bw3sley/valoroast/blob/main/LICENSE.md">
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License"/>
+</a>
 
-It started as a side project to roast my Valorant friends. It makes no attempt at serious analysis. The point is a laugh and a link to share. [Try Valoroast](https://valoroast.com/).
+</br>
 
-## What you can do
+![Preview Screen](./assets/cover.png)
 
-- **Roast a player.** Type a Riot ID and get a verdict written from their agents, K/D, headshot rate and habits.
-- **Share the result.** Every roast is saved and gets a share link, and you can download the verdict as a card to send to the person you just roasted.
-- **Start a rivalry.** Put two players against each other and let the app decide who is the bigger disappointment.
+## 💻 About this project
 
-## Tech stack
+Valoroast turns a Valorant player's stats into a joke verdict. Enter a Riot ID, and the app pulls recent match data, then writes a short, exaggerated roast you can send to the friend who keeps dying first on site. Every roast is saved with a share link and can be downloaded as a card, and you can put two players against each other to see who is the bigger disappointment. [Try Valoroast](https://valoroast.com/).
 
-| Area | Tools |
-| --- | --- |
-| Framework | Next.js 16 (App Router), React 19, TypeScript |
-| Styling | Tailwind CSS v4, Radix UI, Tailwind Variants |
-| Roast text | Vercel AI SDK with OpenAI (`gpt-4o-mini` by default) |
-| Player data | HenrikDev API, an unofficial Valorant API |
-| Database | Neon Postgres with Drizzle ORM |
-| Client state | TanStack Query, Zustand, React Hook Form, Zod |
-| Abuse protection | `rate-limiter-flexible`, per IP and for HenrikDev calls |
-| Icons | Lucide React |
-| Analytics | PostHog (optional) |
-| Tooling | Biome, Docker |
+It started as a side project to roast my Valorant friends. It makes no attempt at serious analysis. The point is a laugh and a link to share.
 
-The app logic lives in Next.js route handlers under `src/app/api`, so the OpenAI and HenrikDev keys never reach the browser. Roasts are stored in Neon so each one can be opened again from its link. Rate limits keep the OpenAI bill and the HenrikDev quota under control.
+I'll be happy if you could send me any feedback about the project, code, structure or anything that you can report that could make me better as a developer!
 
-Optional PostHog analytics runs only when `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` is set. It records fixed-choice actions. It excludes Riot IDs, rival IDs, roast text and any free text.
+And you can use this project as you wish!
 
-## Running it locally
+## :octocat: Cloning repo
 
 ```bash
-npm install
-cp .env.example .env.local   # add OPENAI_API_KEY, HENRIKDEV_API_KEY and DATABASE_URL
-npm run db:migrate
-npm run dev
+$ git clone https://github.com/bw3sley/valoroast.git
+
+$ cd valoroast
+
+$ npm install
+
+$ cp .env.example .env.local
+
+$ npm run db:migrate
+
+$ npm run dev
 ```
 
-The app runs at http://localhost:3000. `OPENAI_MODEL`, `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_POSTHOG_PROJECT_TOKEN` are optional. Run `npm run lint` and `npm run build` to check your changes. A `Dockerfile` is included for deployment.
+Fill `.env.local` first with `OPENAI_API_KEY`, `HENRIKDEV_API_KEY` and `DATABASE_URL`. The app runs at http://localhost:3000.
 
-## Disclaimer
+## 🚀 Built with
+
+This project was built with:
+
+- Next.js 16 and TypeScript
+- Tailwind CSS v4
+- Radix UI
+- Vercel AI SDK with OpenAI
+- Neon Postgres and Drizzle ORM
+- TanStack Query
+- Biome
+
+## ⚠️ Disclaimer
 
 Valoroast isn't endorsed by Riot Games and doesn't reflect the views of Riot Games or anyone officially involved in producing or managing Riot Games properties. Player data comes from an unofficial third-party API and may break.
 
-## Feedback
+## 📩 Reach me out
 
-Have an idea or found something that feels off? [Open an issue](https://github.com/bw3sley/valoroast/issues). If you like the project, [leave it a star](https://github.com/bw3sley/valoroast).
+You can reach me at bw3sley@gmail.com or connect with me at [LinkedIn](https://www.linkedin.com/in/bw3sley)
 
-## License
+## 📝 License
 
-Valoroast is available under the [MIT License](./LICENSE.md).
+This project is licensed under the MIT License - see the [LICENSE.md](./LICENSE.md) file for details.
